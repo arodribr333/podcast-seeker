@@ -1,0 +1,43 @@
+{
+    "resultCount": 1,
+    "results": [
+        {
+            "wrapperType": "track",
+            "kind": "podcast",
+            "collectionId": 1448113230,
+            "trackId": 1448113230,
+            "artistName": "Miguel Ángel Durán García",
+            "collectionName": "Programación JavaScript y Desarrollo Web con midudev",
+            "trackName": "Programación JavaScript y Desarrollo Web con midudev",
+            "collectionCensoredName": "Programación JavaScript y Desarrollo Web con midudev",
+            "trackCensoredName": "Programación JavaScript y Desarrollo Web con midudev",
+            "collectionViewUrl": "https://podcasts.apple.com/es/podcast/programaci%C3%B3n-javascript-y-desarrollo-web-con-midudev/id1448113230?uo=4",
+            "feedUrl": "https://anchor.fm/s/2c58e75c/podcast/rss",
+            "trackViewUrl": "https://podcasts.apple.com/es/podcast/programaci%C3%B3n-javascript-y-desarrollo-web-con-midudev/id1448113230?uo=4",
+            "artworkUrl30": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/68/59/56/6859561b-cbdb-86f4-fc85-66b6fa1542e2/mza_13900044619918419783.jpg/30x30bb.jpg",
+            "artworkUrl60": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/68/59/56/6859561b-cbdb-86f4-fc85-66b6fa1542e2/mza_13900044619918419783.jpg/60x60bb.jpg",
+            "artworkUrl100": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/68/59/56/6859561b-cbdb-86f4-fc85-66b6fa1542e2/mza_13900044619918419783.jpg/100x100bb.jpg",
+            "collectionPrice": 0.00,
+            "trackPrice": 0.00,
+            "collectionHdPrice": 0,
+            "releaseDate": "2023-07-03T07:01:00Z",
+            "collectionExplicitness": "notExplicit",
+            "trackExplicitness": "cleaned",
+            "trackCount": 31,
+            "trackTimeMillis": 764,
+            "country": "ESP",
+            "currency": "EUR",
+            "primaryGenreName": "Tecnología",
+            "contentAdvisoryRating": "Clean",
+            "artworkUrl600": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/68/59/56/6859561b-cbdb-86f4-fc85-66b6fa1542e2/mza_13900044619918419783.jpg/600x600bb.jpg",
+            "genreIds": [
+                "1318",
+                "26"
+            ],
+            "genres": [
+                "Tecnología",
+                "Podcasts"
+            ]
+        }
+    ]
+}
