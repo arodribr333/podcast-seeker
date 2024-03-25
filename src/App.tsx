@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { PodcastTrack } from "./components/PodcastTrack/PodcastTrack";
 import { useXMLParser } from "./hooks/useXMLParses";
 import searchResponse from "./mocks/with-results.json";
 function App() {
@@ -23,33 +24,35 @@ function App() {
 	console.log(channel);
 	return (
 		<>
-			{hasResults ? (
-				searchResponse.results.map((result) => (
-					<div key={result.trackId}>
-						<img src={result.artworkUrl100} alt={result.collectionName} />
-						<div className="data">
-							<h1>{result.artistName}</h1>
-							<p>{result.collectionName}</p>
-							<p>
-								<a
-									href={result.collectionViewUrl}
-									target="_blank"
-									rel="noreferrer"
-								>
-									{result.collectionName}
-								</a>
-							</p>
-							<p>
-								<a href={result.feedUrl} target="_blank" rel="noreferrer">
-									Feed URL
-								</a>
-							</p>
-						</div>
-					</div>
-				))
-			) : (
-				<p>No se encontraron resultados</p>
-			)}
+			<h1>Buscador de podcast</h1>
+			<section>
+				<h2>Resultados de la búsqueda:</h2>
+				{hasResults ? (
+					searchResponse.results.map((result) => (
+						<article key={result.trackId}>
+							<img src={result.artworkUrl100} alt={result.collectionName} />
+							<div className="data">
+								<h3>{result.artistName}</h3>
+								<p>{result.collectionName}</p>
+								<p>{result.primaryGenreName}</p>
+								<ul>
+									{result.genres.map((genre) => (
+										<li key={genre}>{genre}</li>
+									))}
+								</ul>
+								<p>Artículos: {result.trackCount}</p>
+							</div>
+							<div>
+								{channel.items.map((item) => (
+									<PodcastTrack key={item.audio} item={item} />
+								))}
+							</div>
+						</article>
+					))
+				) : (
+					<p>No se encontraron resultados</p>
+				)}
+			</section>
 		</>
 	);
 }

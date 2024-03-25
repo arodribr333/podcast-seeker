@@ -21,12 +21,13 @@ export interface XmlChannelOwner {
 	name: XmlData;
 }
 type MappedXmlChannelItem = {
-	author?: string;
+	id: string;
+	author: string;
 	duration: string;
 	audio: string;
 	episode: string;
 	image: string;
-	season?: string | XmlData;
+	season: string;
 	title: string;
 };
 export interface XmlChannelItem {
@@ -47,20 +48,20 @@ export interface XmlChannelItem {
 }
 export interface XMLChannel {
 	author: string[] | XmlData[];
-	category: XmlData;
+	category: XmlData.__text;
 	copyright: string;
 	description: string;
 	explicit: XmlData;
 	generator: string;
 	image: XmlChannelImage[];
-	item: XmlChannelItem[];
+	item: XmlChannelItem[] | [];
 	language: string;
 	lastBuildDate: string;
 	link: Array<string | XmlData>;
 	owner: XmlChannelOwner;
 	summary: XmlData;
 	title: string;
-	type: XmlData;
+	type: XmlData.__text;
 }
 export interface XmlDocRss {
 	channel: XMLChannel;
