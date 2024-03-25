@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import styles from "./App.module.css";
 import { PodcastTrack } from "./components/PodcastTrack/PodcastTrack";
 import { useXMLParser } from "./hooks/useXMLParses";
 import searchResponse from "./mocks/with-results.json";
@@ -21,7 +21,6 @@ function App() {
 				});
 		});
 	}, [handleChannel]);
-	console.log(channel);
 	return (
 		<>
 			<h1>Buscador de podcast</h1>
@@ -34,15 +33,22 @@ function App() {
 							<div className="data">
 								<h3>{result.artistName}</h3>
 								<p>{result.collectionName}</p>
-								<p>{result.primaryGenreName}</p>
-								<ul>
+								<p>Categorías:</p>
+								<ul className={styles.genreList}>
 									{result.genres.map((genre) => (
-										<li key={genre}>{genre}</li>
+										<li
+											className={`${styles.genre} ${
+												result.primaryGenreName === genre && styles.genrePrimary
+											}`}
+											key={genre}
+										>
+											{genre}
+										</li>
 									))}
 								</ul>
 								<p>Artículos: {result.trackCount}</p>
 							</div>
-							<div>
+							<div className={styles.channel}>
 								{channel.items.map((item) => (
 									<PodcastTrack key={item.audio} item={item} />
 								))}

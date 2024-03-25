@@ -10,18 +10,23 @@ export const PodcastTrack = ({ item }: PodcastTrackProps) => {
 			<div className={styles.trackItem}>
 				<img className={styles.trackImg} src={item.image} alt={item.title} />
 				<div className={styles.trackInfo}>
-					<h4>{item.title}</h4>
+					<h4 className={styles.title}>{item.title}</h4>
 					<p className={styles.trackDuration}>
 						<IconTime /> {item.duration}
 					</p>
-					<p>
+					<p className={styles.seasonEpisode}>
 						<span className={styles.bold}>S</span>
 						{item.season}/<span className={styles.bold}>E</span>
 						{item.episode}
 					</p>
 				</div>
 			</div>
-			<button type="button" onClick={() => {}}>
+			<button
+				className={styles.actionButton}
+				title={item.title}
+				type="button"
+				onClick={() => {}}
+			>
 				<IconPlay />
 			</button>
 		</article>
