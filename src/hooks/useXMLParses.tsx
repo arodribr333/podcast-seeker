@@ -30,7 +30,7 @@ export const useXMLParser = () => {
 				episode: item.episode?.__text,
 				image: item.image?._href,
 				season: item.season?.__text,
-				title: item.title,
+				title: item.title.toString(),
 			};
 		});
 		setReturnedChannel({
