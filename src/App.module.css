@@ -25,29 +25,16 @@
     font-size: 0.825rem;
 }
 
-.genreList {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0.5rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.genre {
-    background-color: #0099ff;
-    color: #fff;
-    border-radius: 1rem;
-    padding: 0.2rem 1rem;
-}
-
-.genrePrimary {
-    font-weight: bold;
-    background-color: #c522b7;
-}
 .channel {
     display: flex;
     flex-flow: column nowrap;
     gap: 1rem;
+}
+.search {
+    width: 100%;
+}
+.searchResults {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr ));
 }
