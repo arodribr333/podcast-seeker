@@ -1,27 +1,35 @@
-import { useEffect } from "react";
-import podcasts from "../mocks/with-results.json";
+import { useEffect, useState } from "react";
+import type { PodcastsResponse } from '../types/types.d';
 import { useXMLParser } from "./useXMLParses";
-
+const initialPodcastsResponse: PodcastsResponse = {
+    resultCount: 0,
+    results: []
+};
 export const usePodcasts = () => {
-	const hasResults = podcasts.resultCount > 0;
-	const { channel, handleChannel } = useXMLParser();
-	useEffect(() => {
-		// fetch(
-		// 	"https://itunes.apple.com/search?term=midudev&country=es&media=podcast",
-		// )
-		// 	.then((res) => res.json())
-		// 	.then((data) => setResponse(data));
-		podcasts.results.map((result) => {
-			fetch(result.feedUrl)
-				.then((res) => res.text())
-				.then((data) => {
-					handleChannel({ inputData: data });
-				});
-		});
-	}, [handleChannel]);
-	return {
-		hasResults,
-		channel,
-		podcasts,
-	};
+    const [ podcasts, setPodcasts ] = useState( initialPodcastsResponse );
+    const hasResults = podcasts.resultCount > 0;
+    const { handleChannel } = useXMLParser();
+    useEffect( () => {
+        podcasts.results.map( async ( result ) => {
+            try {
+                const response = await fetch( result.feedUrl );
+                const text = await response.text();
+                const channel = handleChannel( { inputData: text } );
+                console.log( channel );
+            } catch ( e ) {
+                throw new Error( 'Searching podcast error' );
+            }
+        } );
+    }, [ podcasts, handleChannel ] );
+
+    const handleSetPodcasts = ( inputPodcast: PodcastsResponse ) => {
+        if ( !inputPodcast ) return;
+        if ( inputPodcast === podcasts ) return;
+        setPodcasts( inputPodcast );
+    };
+    return {
+        hasResults,
+        podcasts,
+        handleSetPodcasts
+    };
 };

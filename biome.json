@@ -12,7 +12,6 @@
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "space",
-    	"indentWidth": 4,
-		"quoteStyle": "single"
+    	"indentWidth": 4
 	}
 }
