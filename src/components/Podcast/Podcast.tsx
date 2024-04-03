@@ -1,3 +1,4 @@
+import { useChannels } from '../../hooks/useChannels';
 import type { PodcastType } from "../../types/types";
 import { IconView } from "../Icons/Icons";
 import styles from "./Podcast.module.css";
@@ -6,6 +7,11 @@ interface PodcastProps {
     podcast: PodcastType;
 }
 export const Podcast = ( { podcast }: PodcastProps ) => {
+    const { getChannel } = useChannels();
+
+    const handleViewPodcast = () => {
+        getChannel( podcast.feedUrl ).then( ( data ) => console.log( data ) );
+    };
     return (
         <article className={styles.podcast}>
             <div className={styles.podcastInfo}>
@@ -30,7 +36,11 @@ export const Podcast = ( { podcast }: PodcastProps ) => {
                     </ul>
                 </div>
             </div>
-            <button className={styles.podcastButton} type="button" title={`Ver ${ podcast.collectionName }`}>
+            <button
+                className={styles.podcastButton}
+                type="button"
+                title={`Ver ${ podcast.collectionName }`}
+                onClick={handleViewPodcast}>
                 <IconView />
             </button>
             {/* <div className={styles.channel}>
