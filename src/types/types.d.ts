@@ -21,8 +21,6 @@ export interface XmlChannelOwner {
 	name: XmlData;
 }
 type MappedXmlChannelItem = {
-	id: string;
-	author: string;
 	duration: string;
 	audio: string;
 	episode: string;

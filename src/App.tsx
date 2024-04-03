@@ -5,7 +5,7 @@ import { useSearch } from './hooks/useSearch';
 import { SearchPodcasts } from './services/SearchPodcasts';
 function App () {
     const { hasResults, podcasts, handleSetPodcasts } = usePodcasts();
-    const { search, error, updateSearch } = useSearch();
+    const { search, error, isFirstSearch, updateSearch } = useSearch();
     const handleSearchSubmit = async (
         event: React.FormEvent<HTMLFormElement>,
     ): Promise<void> => {
@@ -34,7 +34,6 @@ function App () {
                     {error && <p className={styles.error}>{error}</p>}
                 </form>
             </header>
-
             <section className={styles.search}>
                 <h2>Resultados de la búsqueda:</h2>
                 <div className={styles.searchResults}>

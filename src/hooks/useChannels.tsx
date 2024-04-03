@@ -7,7 +7,8 @@ export const useChannels = () => {
             .then( ( response ) => response.text() )
             .then( ( data ) => {
                 return handleChannel( { inputData: data } );
-            } );
+            } )
+            .catch( error => console.log( `Error fetching ${ error }` ) );
     };
     return {
         getChannel
