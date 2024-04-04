@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import styles from './App.module.css';
 import { SearchResults } from './components/SearchResults/SearchResults';
 import { usePodcasts } from './hooks/usePodcasts';
@@ -8,12 +8,14 @@ import { SearchPodcasts } from './services/SearchPodcasts';
 function App () {
     const { hasResults, podcasts, handleSetPodcasts } = usePodcasts();
     const { search, error, updateSearch } = useSearch();
+    const navigate = useNavigate();
     const handleSearchSubmit = async (
         event: React.FormEvent<HTMLFormElement>,
     ): Promise<void> => {
         event.preventDefault();
         const podcast = await SearchPodcasts( { search } );
         handleSetPodcasts( podcast );
+        navigate( '/' );
     };
     const handleInputChange = ( event: React.FormEvent<HTMLInputElement> ) => {
         updateSearch( event.currentTarget.value );
