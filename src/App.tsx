@@ -1,10 +1,10 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import styles from './App.module.css';
+import { HeaderSeeker } from './components/HeaderSeeker/HeaderSeeker';
 import { SearchResults } from './components/SearchResults/SearchResults';
 import { usePodcasts } from './hooks/usePodcasts';
 import { useSearch } from './hooks/useSearch';
 import { SearchPodcasts } from './services/SearchPodcasts';
-
 function App () {
     const { hasResults, podcasts, handleSetPodcasts } = usePodcasts();
     const { search, error, updateSearch } = useSearch();
@@ -22,26 +22,10 @@ function App () {
     };
     return (
         <div className={styles.page}>
-            <header>
-                <h1>Buscador de podcast</h1>
-                <form className={styles.form} onSubmit={handleSearchSubmit}>
-                    <div className={styles.formSearch}>
-                        <input
-                            type='text'
-                            value={search}
-                            onChange={handleInputChange}
-                            name='query'
-                            placeholder='National Geographic, midudev...'
-                        />
-                        <button type='submit'>Buscar</button>
-                    </div>
-                    {error && <p className={styles.error}>{error}</p>}
-                </form>
-            </header>
+            <HeaderSeeker search={search} error={error} searchSubmit={handleSearchSubmit} inputChange={handleInputChange} />
             <Routes>
                 <Route path='/' element={<SearchResults hasResults={hasResults} podcasts={podcasts} />} />
             </Routes>
-
         </div>
     );
 }

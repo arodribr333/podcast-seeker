@@ -1,0 +1,21 @@
+
+.form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+.form * {
+    margin: 0;
+}
+.formSearch {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.error {
+    color: red;
+    font-size: 0.825rem;
+}
