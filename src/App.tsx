@@ -1,11 +1,13 @@
+import { Route, Routes } from 'react-router-dom';
 import styles from './App.module.css';
-import { Podcast } from './components/Podcast/Podcast';
+import { SearchResults } from './components/SearchResults/SearchResults';
 import { usePodcasts } from './hooks/usePodcasts';
 import { useSearch } from './hooks/useSearch';
 import { SearchPodcasts } from './services/SearchPodcasts';
+
 function App () {
     const { hasResults, podcasts, handleSetPodcasts } = usePodcasts();
-    const { search, error, isFirstSearch, updateSearch } = useSearch();
+    const { search, error, updateSearch } = useSearch();
     const handleSearchSubmit = async (
         event: React.FormEvent<HTMLFormElement>,
     ): Promise<void> => {
@@ -34,18 +36,10 @@ function App () {
                     {error && <p className={styles.error}>{error}</p>}
                 </form>
             </header>
-            <section className={styles.search}>
-                <h2>Resultados de la búsqueda:</h2>
-                <div className={styles.searchResults}>
-                    {hasResults ? (
-                        podcasts.results.map( ( result ) => (
-                            <Podcast key={result.trackId} podcast={result} />
-                        ) )
-                    ) : (
-                        <p>No se encontraron resultados</p>
-                    )}
-                </div>
-            </section>
+            <Routes>
+                <Route path='/' element={<SearchResults hasResults={hasResults} podcasts={podcasts} />} />
+            </Routes>
+
         </div>
     );
 }

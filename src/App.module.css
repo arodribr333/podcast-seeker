@@ -30,11 +30,3 @@
     flex-flow: column nowrap;
     gap: 1rem;
 }
-.search {
-    width: 100%;
-}
-.searchResults {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr ));
-}

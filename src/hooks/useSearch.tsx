@@ -4,11 +4,9 @@ export const useSearch = () => {
 	const [ search, updateSearch ] = useState( '' );
 	const [ error, setError ] = useState<string | null>( null );
 	const isFirstRender = useRef( true );
-	const [ isFirstSearch, setIsFirstSearch ] = useState( true );
 	useEffect( () => {
 		if ( isFirstRender.current ) {
 			isFirstRender.current = search === '';
-			setIsFirstSearch( false );
 			return;
 		}
 		if ( search === '' ) {
@@ -24,7 +22,6 @@ export const useSearch = () => {
 	return {
 		search,
 		error,
-		isFirstSearch,
 		updateSearch
 	};
 };
