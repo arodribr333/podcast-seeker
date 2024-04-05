@@ -12,6 +12,7 @@
 	"formatter": {
 		"enabled": true,
 		"indentStyle": "space",
-    	"indentWidth": 4
+    	"indentWidth": 4,
+		"attributePosition": "multiline"
 	}
 }
