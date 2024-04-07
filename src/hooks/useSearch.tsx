@@ -1,9 +1,38 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SearchsContext } from '../context/SearchsContext';
+import { SearchPodcasts } from '../services/SearchPodcasts';
 
 export const useSearch = () => {
+	const { searchInfo, setSearchInfo } = useContext( SearchsContext );
+	const { channelUsed } = searchInfo;
+	const [ firstSearch, setFirstSearch ] = useState( true );
 	const [ search, updateSearch ] = useState( '' );
 	const [ error, setError ] = useState<string | null>( null );
 	const isFirstRender = useRef( true );
+	const navigate = useNavigate();
+	const handleInputChange = ( event: React.FormEvent<HTMLInputElement> ) => {
+		updateSearch( event.currentTarget.value );
+	};
+	const handleSearchSubmit = async (
+		event: React.FormEvent<HTMLFormElement>
+	): Promise<void> => {
+		event.preventDefault();
+		await SearchPodcasts( { search } ).then( ( podcasts ) => {
+			setSearchInfo( {
+				channelUsed: channelUsed,
+				searchUsed: {
+					hasResults: podcasts.resultCount > 0,
+					term: search,
+					podcasts
+				}
+			} );
+			return podcasts;
+		} );
+		firstSearch && setFirstSearch( false );
+		if ( window.location.pathname === '/' ) return;
+		navigate( "/" );
+	};
 	useEffect( () => {
 		if ( isFirstRender.current ) {
 			isFirstRender.current = search === '';
@@ -22,6 +51,8 @@ export const useSearch = () => {
 	return {
 		search,
 		error,
-		updateSearch
+		firstSearch,
+		handleInputChange,
+		handleSearchSubmit
 	};
 };

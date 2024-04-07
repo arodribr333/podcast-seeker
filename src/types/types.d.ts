@@ -68,6 +68,7 @@ export interface XmlDoc {
 	rss: XmlDocRss;
 }
 export interface ReturnedChannel {
+	id: number;
 	author: string;
 	category: string;
 	description: string;

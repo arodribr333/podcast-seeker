@@ -1,25 +1,5 @@
 import { createContext, useState } from 'react';
-import type { PodcastsResponse } from '../types/types';
-interface ProviderChannel {
-    collectionId: number;
-    feedUrl: string;
-}
-interface ProviderSearch {
-    hasResults: boolean;
-    term: string;
-    podcasts: PodcastsResponse;
-}
-export interface SearchsContextState {
-    searchUsed: ProviderSearch;
-    channelUsed: ProviderChannel | null;
-}
-interface SearchsContextType {
-    searchInfo: SearchsContextState;
-    setSearchInfo: React.Dispatch<SearchsContextState>;
-}
-interface SearchsProviderProps {
-    children: JSX.Element;
-}
+import type { SearchsContextState, SearchsContextType, SearchsProviderProps } from '../types/context.types';
 const initialState: SearchsContextState = {
     searchUsed: {
         hasResults: false,
@@ -29,7 +9,10 @@ const initialState: SearchsContextState = {
             results: []
         }
     },
-    channelUsed: null,
+    channelUsed: {
+        feedUrl: '',
+        trackId: 0
+    },
 };
 export const SearchsContext = createContext<SearchsContextType>( {} as SearchsContextType );
 export const SearchsProvider = ( { children }: SearchsProviderProps ) => {

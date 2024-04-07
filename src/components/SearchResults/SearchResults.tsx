@@ -1,17 +1,20 @@
 import { useContext } from 'react';
 import { SearchsContext } from '../../context/SearchsContext';
+import type { PodcastType } from '../../types/types';
 import { Podcast } from '../Podcast/Podcast';
 import styles from './SearchResults.module.css';
 
 export const SearchResults = () => {
     const { searchInfo } = useContext( SearchsContext );
+    const { searchUsed } = searchInfo;
+    const { hasResults, podcasts } = searchUsed;
     return (
         <section className={styles.search}>
             <h2>Resultados de la búsqueda:</h2>
             <div className={styles.searchResults}>
-                {searchInfo.searchUsed.hasResults ? (
-                    searchInfo.searchUsed.podcasts.results.map( ( result ) => (
-                        <Podcast key={result.trackId} podcast={result} />
+                {hasResults ? (
+                    podcasts.results.map( ( podcast: PodcastType ) => (
+                        <Podcast key={podcast.trackId} podcast={podcast} />
                     ) )
                 ) : (
                     <p>Realiza una nueva búsqueda</p>
