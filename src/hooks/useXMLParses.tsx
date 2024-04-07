@@ -16,6 +16,13 @@ export const useXMLParser = () => {
         const xmlDoc: XmlDoc = x2js.xml2js( inputData );
         const channel: XMLChannel = xmlDoc.rss?.channel;
         const xmlItem: XmlChannelItem[] = xmlDoc.rss.channel.item;
+        const formatDate = ( input: string ): string => {
+            const date = new Date( input );
+            const day = String( date.getDate() ).padStart( 2, '0' );
+            const month = String( date.getMonth() + 1 ).padStart( 2, '0' );
+            const year = date.getFullYear();
+            return `${ day }/${ month }/${ year }`;
+        };
         const processXmlItem = ( item: XmlChannelItem[] | XmlChannelItem ) => {
             if ( Array.isArray( item ) ) {
                 const XmlMappedItems = xmlItem.map( ( item ) => {
@@ -26,11 +33,12 @@ export const useXMLParser = () => {
                         image: item.image?._href,
                         season: item.season?.__text,
                         title: item.title.toString(),
+                        date: formatDate( item.pubDate )
                     };
                 } );
                 return XmlMappedItems;
             }
-            const { duration, enclosure, episode, image, season, title } = item;
+            const { duration, enclosure, episode, image, season, title, pubDate } = item;
             const compose = {
                 duration: duration?.__text,
                 audio: enclosure?._url,
@@ -38,6 +46,7 @@ export const useXMLParser = () => {
                 image: image?._href,
                 season: season?.__text,
                 title: title.toString(),
+                date: formatDate( pubDate )
             };
             const composeArray = new Array();
             composeArray.push( compose );
@@ -46,13 +55,15 @@ export const useXMLParser = () => {
         const XmlMappedItems = processXmlItem( xmlItem );
         return {
             id: trackId,
+            title: channel.title,
             author: channel.owner.name.__text,
+            image: channel.image[ 0 ].url,
             category: channel.category._text,
             description: channel.description,
             generator: channel.generator,
             items: XmlMappedItems,
             language: channel.language,
-            type: channel.type,
+            type: channel.type
         };
     }, [] );
 

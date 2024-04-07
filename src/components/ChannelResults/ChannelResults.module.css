@@ -1,5 +1,56 @@
+.channelPage {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 2rem;
+}
 .channelResults {
     display: flex;
     flex-flow: column nowrap;
+    gap: 0.5rem;
+    padding: 0 1rem;
+}
+.info {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
     gap: 1rem;
+    padding: 1rem;
+    background-color: #63637175;
+}
+.info * {
+    margin: 0;
+}
+.infoFigure {
+    max-width: 10rem;
+    margin: 0;
+    display: flex;
+}
+.infoImg {
+    max-width: 100%;
+    height: auto;
+}
+.infoChannel {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.5rem;
+}
+.description {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: pretty;
+}
+
+
+.error {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 1rem;
+}
+.error svg {
+    width: 5rem;
+    height: 5rem;
 }

@@ -27,6 +27,7 @@ type MappedXmlChannelItem = {
 	image: string;
 	season: string;
 	title: string;
+	date: string;
 };
 export interface XmlChannelItem {
 	creator: XmlData;
@@ -69,7 +70,9 @@ export interface XmlDoc {
 }
 export interface ReturnedChannel {
 	id: number;
+	title: string;
 	author: string;
+	image: string;
 	category: string;
 	description: string;
 	generator: string;

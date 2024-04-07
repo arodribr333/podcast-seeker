@@ -39,13 +39,19 @@
 .bold {
     font-weight: bold;
 }
-.trackDuration {
+.dateAndDuration {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 1rem;
+}
+.trackDuration, .date {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     gap: 0.5rem;
 }
-.trackDuration svg {
+.trackDuration svg, .date svg {
     width: 1.5rem;
     height: 1.5rem;
 }
