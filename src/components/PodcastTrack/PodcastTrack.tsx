@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { PlayerContext } from '../../context/PlayerContext';
 import type { MappedXmlChannelItem } from "../../types/types";
 import { IconCalendar, IconPlay, IconTime } from "../Icons/Icons";
 import styles from "./PodcastTrack.module.css";
@@ -5,6 +7,21 @@ interface PodcastTrackProps {
 	item: MappedXmlChannelItem;
 }
 export const PodcastTrack = ( { item }: PodcastTrackProps ) => {
+	const { playerStatus, setPlayerStatus } = useContext( PlayerContext );
+	const { searchUsed, channelUsed, player } = playerStatus;
+	const { status } = player;
+	const { id, audio } = item;
+	const handleAudio = () => {
+		setPlayerStatus( {
+			searchUsed,
+			channelUsed,
+			player: {
+				audioId: id,
+				audioUrl: audio,
+				status: 'running'
+			}
+		} );
+	};
 	return (
 		<article className={styles.track}>
 			<div className={styles.trackItem}>
@@ -36,7 +53,7 @@ export const PodcastTrack = ( { item }: PodcastTrackProps ) => {
 				className={styles.actionButton}
 				title={item.title}
 				type="button"
-				onClick={() => { }}
+				onClick={handleAudio}
 			>
 				<IconPlay />
 			</button>

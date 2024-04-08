@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SearchsContext } from '../../context/SearchsContext';
+import { PlayerContext } from '../../context/PlayerContext';
 import type { PodcastType } from "../../types/types";
 import { IconView } from "../Icons/Icons";
 import styles from "./Podcast.module.css";
@@ -9,13 +9,14 @@ interface PodcastProps {
     podcast: PodcastType;
 }
 export const Podcast = ( { podcast }: PodcastProps ) => {
-    const { searchInfo, setSearchInfo } = useContext( SearchsContext );
-    const { searchUsed } = searchInfo;
+    const { playerStatus, setPlayerStatus } = useContext( PlayerContext );
+    const { searchUsed, player } = playerStatus;
     const navigate = useNavigate();
     // const { getChannel } = useChannels();
     const { feedUrl, trackId, artworkUrl100, collectionName, artistName, genres, primaryGenreName } = podcast;
     const handleViewPodcast = () => {
-        setSearchInfo( {
+        setPlayerStatus( {
+            player,
             searchUsed,
             channelUsed: {
                 trackId,

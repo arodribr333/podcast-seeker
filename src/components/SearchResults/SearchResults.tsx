@@ -1,12 +1,12 @@
 import { useContext } from 'react';
-import { SearchsContext } from '../../context/SearchsContext';
+import { PlayerContext } from '../../context/PlayerContext';
 import type { PodcastType } from '../../types/types';
 import { Podcast } from '../Podcast/Podcast';
 import styles from './SearchResults.module.css';
 
 export const SearchResults = () => {
-    const { searchInfo } = useContext( SearchsContext );
-    const { searchUsed } = searchInfo;
+    const { playerStatus } = useContext( PlayerContext );
+    const { searchUsed } = playerStatus;
     const { hasResults, podcasts } = searchUsed;
     return (
         <section className={styles.search}>

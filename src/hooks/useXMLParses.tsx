@@ -23,10 +23,16 @@ export const useXMLParser = () => {
             const year = date.getFullYear();
             return `${ day }/${ month }/${ year }`;
         };
+        const getItemId = ( date: string ): number => {
+            const pub = new Date( date ).getTime();
+            const result = ( Math.floor( trackId * ( trackId * Math.random() ) ) ) + pub;
+            return result;
+        };
         const processXmlItem = ( item: XmlChannelItem[] | XmlChannelItem ) => {
             if ( Array.isArray( item ) ) {
                 const XmlMappedItems = xmlItem.map( ( item ) => {
                     return {
+                        id: getItemId( item.pubDate ),
                         duration: item.duration?.__text,
                         audio: item.enclosure?._url,
                         episode: item.episode?.__text,
@@ -40,6 +46,7 @@ export const useXMLParser = () => {
             }
             const { duration, enclosure, episode, image, season, title, pubDate } = item;
             const compose = {
+                id: getItemId( pubDate ),
                 duration: duration?.__text,
                 audio: enclosure?._url,
                 episode: episode?.__text,

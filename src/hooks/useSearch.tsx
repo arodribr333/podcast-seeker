@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SearchsContext } from '../context/SearchsContext';
+import { PlayerContext } from '../context/PlayerContext';
 import { SearchPodcasts } from '../services/SearchPodcasts';
 
 export const useSearch = () => {
-	const { searchInfo, setSearchInfo } = useContext( SearchsContext );
-	const { channelUsed } = searchInfo;
+	const { playerStatus, setPlayerStatus } = useContext( PlayerContext );
+	const { channelUsed, player } = playerStatus;
 	const [ firstSearch, setFirstSearch ] = useState( true );
 	const [ search, updateSearch ] = useState( '' );
 	const [ error, setError ] = useState<string | null>( null );
@@ -19,8 +19,9 @@ export const useSearch = () => {
 	): Promise<void> => {
 		event.preventDefault();
 		await SearchPodcasts( { search } ).then( ( podcasts ) => {
-			setSearchInfo( {
-				channelUsed: channelUsed,
+			setPlayerStatus( {
+				player,
+				channelUsed,
 				searchUsed: {
 					hasResults: podcasts.resultCount > 0,
 					term: search,
