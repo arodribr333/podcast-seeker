@@ -7,21 +7,7 @@ interface PodcastTrackProps {
 	item: MappedXmlChannelItem;
 }
 export const PodcastTrack = ( { item }: PodcastTrackProps ) => {
-	const { playerStatus, setPlayerStatus } = useContext( PlayerContext );
-	const { searchUsed, channelUsed, player } = playerStatus;
-	const { status } = player;
-	const { id, audio } = item;
-	const handleAudio = () => {
-		setPlayerStatus( {
-			searchUsed,
-			channelUsed,
-			player: {
-				audioId: id,
-				audioUrl: audio,
-				status: 'running'
-			}
-		} );
-	};
+	const { handleUrlChange } = useContext( PlayerContext );
 	return (
 		<article className={styles.track}>
 			<div className={styles.trackItem}>
@@ -53,7 +39,7 @@ export const PodcastTrack = ( { item }: PodcastTrackProps ) => {
 				className={styles.actionButton}
 				title={item.title}
 				type="button"
-				onClick={handleAudio}
+				onClick={() => handleUrlChange( item.audio )}
 			>
 				<IconPlay />
 			</button>

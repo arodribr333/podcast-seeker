@@ -1,4 +1,7 @@
 .page {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 0 1rem;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -10,4 +13,9 @@
     display: flex;
     flex-flow: column nowrap;
     gap: 1rem;
+}
+
+.player {
+    display: fixed;
+    bottom: 0;
 }

@@ -5,8 +5,7 @@ import { Podcast } from '../Podcast/Podcast';
 import styles from './SearchResults.module.css';
 
 export const SearchResults = () => {
-    const { playerStatus } = useContext( PlayerContext );
-    const { searchUsed } = playerStatus;
+    const { searchUsed } = useContext( PlayerContext );
     const { hasResults, podcasts } = searchUsed;
     return (
         <section className={styles.search}>

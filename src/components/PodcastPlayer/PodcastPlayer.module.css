@@ -1,0 +1,22 @@
+.player {
+    position: sticky;
+    bottom: 0;
+    background-color: #420b50;
+    padding: 1rem;
+    box-shadow: 0px -1px 13px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.player * {
+    margin: 0;
+}
+.runningButton {
+    display: flex;
+}
+.runningButton svg {
+    color: white;
+    width: 2rem;
+    height: 2rem;
+}

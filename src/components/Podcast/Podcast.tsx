@@ -9,19 +9,13 @@ interface PodcastProps {
     podcast: PodcastType;
 }
 export const Podcast = ( { podcast }: PodcastProps ) => {
-    const { playerStatus, setPlayerStatus } = useContext( PlayerContext );
-    const { searchUsed, player } = playerStatus;
+    const { handleChannelUsedChange } = useContext( PlayerContext );
     const navigate = useNavigate();
-    // const { getChannel } = useChannels();
     const { feedUrl, trackId, artworkUrl100, collectionName, artistName, genres, primaryGenreName } = podcast;
     const handleViewPodcast = () => {
-        setPlayerStatus( {
-            player,
-            searchUsed,
-            channelUsed: {
-                trackId,
-                feedUrl,
-            }
+        handleChannelUsedChange( {
+            trackId,
+            feedUrl,
         } );
         navigate( '/channel' );
     };

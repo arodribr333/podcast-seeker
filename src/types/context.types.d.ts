@@ -18,13 +18,30 @@ export interface ProviderPlayer {
     audioUrl: string;
 }
 export interface PlayerContextState {
+    url: string;
+    isPlaying: boolean;
+    volume: number;
+    currentTime: number;
     searchUsed: ProviderSearch;
     channelUsed: ProviderChannel;
     player: ProviderPlayer;
 }
 export interface PlayerContextType {
-    playerStatus: PlayerContextState;
-    setPlayerStatus: React.Dispatch<PlayerContextState>;
+    url: string;
+    searchUsed: ProviderSearch;
+    channelUsed: ProviderChannel;
+    player: ProviderPlayer;
+    isPlaying: boolean;
+    volume: number;
+    currentTime: number;
+    handleUrlChange: ( url: string ) => void;
+    handleSearchUsedChange: ( search: ProviderSearch ) => void;
+    handleChannelUsedChange: ( channel: ProviderChannel ) => void;
+    handlePlayer: ( player: ProviderPlayer ) => void;
+    handlePlay: () => void;
+    handlePause: () => void;
+    handleVolumeChange: ( newVolume: number ) => void;
+    handleTimeChange: ( time: number ) => void;
 }
 export interface PlayerProviderProps {
     children: JSX.Element;

@@ -6,8 +6,7 @@ import { IconError } from "../Icons/Icons";
 import { PodcastTrack } from "../PodcastTrack/PodcastTrack";
 import styles from "./ChannelResults.module.css";
 export const ChannelResults = () => {
-    const { playerStatus, setPlayerStatus } = useContext( PlayerContext );
-    const { channelUsed } = playerStatus;
+    const { channelUsed } = useContext( PlayerContext );
     const { feedUrl, trackId } = channelUsed;
     const { getChannel } = useChannels();
     const [ channel, setChannel ] = useState<Error | ReturnedChannel>();
