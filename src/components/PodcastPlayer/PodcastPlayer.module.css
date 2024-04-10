@@ -1,22 +1,68 @@
 .player {
-    position: sticky;
+    /* position: sticky;
+    bottom: 0; */
+    box-sizing: border-box;
+    width: 100%;
+    position: fixed;
     bottom: 0;
     background-color: #420b50;
-    padding: 1rem;
+    background: linear-gradient(#500b19, #771414);
+    padding: 1rem 0.5rem 0.5rem;
     box-shadow: 0px -1px 13px 5px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
 }
 .player * {
     margin: 0;
 }
+audio {
+    max-width: 50%;
+    max-height: 2.5rem;
+}
+input[type="range"] {
+    margin: 0;
+}
 .runningButton {
     display: flex;
+    align-items: center;
+    max-height: 2.5rem;
+    background: #420101;
 }
 .runningButton svg {
     color: white;
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.playerFigure {
+    max-width: 7rem;
+    display: flex;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 3px solid #500b19;
+    box-sizing: border-box;
+}
+.playerContent {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.5rem;
+}
+.playerTitle {
+    font-size: 0.85rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: pretty;
+}
+.playerChannel {
+    font-size: 0.75rem;
+}
+.playerActions {
+    display: flex;
+    justify-content: space-between;    
 }

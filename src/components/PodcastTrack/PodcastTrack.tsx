@@ -1,15 +1,32 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { PlayerContext } from '../../context/PlayerContext';
 import type { MappedXmlChannelItem } from "../../types/types";
-import { IconCalendar, IconPlay, IconTime } from "../Icons/Icons";
+import { IconCalendar, IconPause, IconPlay, IconTime } from "../Icons/Icons";
 import styles from "./PodcastTrack.module.css";
 interface PodcastTrackProps {
 	item: MappedXmlChannelItem;
 }
 export const PodcastTrack = ( { item }: PodcastTrackProps ) => {
-	const { handleUrlChange } = useContext( PlayerContext );
+	const { url, isPlaying, handleTimeChange, handleUrlChange, handlePlayer } = useContext( PlayerContext );
+	const [ trackRunning, setTrackRunning ] = useState( false );
+	useEffect( () => {
+		if ( isPlaying && ( url === item.audio ) ) {
+			setTrackRunning( true );
+			return;
+		}
+		setTrackRunning( false );
+	}, [ isPlaying, url ] );
+	const handleAddTrack = () => {
+		const { title, image, channel } = item;
+		handleTimeChange( 0 );
+		handlePlayer( { title, image, channel } );
+		handleUrlChange( item.audio );
+	};
 	return (
-		<article className={styles.track}>
+		<article
+			// className={styles.track}
+			className={`${ styles.track } ${ trackRunning && styles.active }`}
+		>
 			<div className={styles.trackItem}>
 				<img
 					className={styles.trackImg}
@@ -36,12 +53,14 @@ export const PodcastTrack = ( { item }: PodcastTrackProps ) => {
 				</div>
 			</div>
 			<button
-				className={styles.actionButton}
+				// className={`${trackRuninng ? ${styles.active} ${styles.actionButton} : ${styles.actionButton}}`}
+				className={`${ styles.actionButton } ${ trackRunning && styles.active }`}
 				title={item.title}
 				type="button"
-				onClick={() => handleUrlChange( item.audio )}
+				onClick={handleAddTrack}
 			>
-				<IconPlay />
+				{trackRunning && <IconPause />}
+				{!trackRunning && <IconPlay />}
 			</button>
 		</article>
 	);

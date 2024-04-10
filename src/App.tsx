@@ -1,9 +1,12 @@
+import { useContext } from 'react';
 import styles from "./App.module.css";
 import { HeaderSeeker } from "./components/HeaderSeeker/HeaderSeeker";
 import { PodcastPlayer } from './components/PodcastPlayer/PodcastPlayer';
+import { PlayerContext } from './context/PlayerContext';
 import { useSearch } from "./hooks/useSearch";
 import { RouterComponent } from './router/RouterComponent';
 function App () {
+    const { url } = useContext( PlayerContext );
     const { search, error, firstSearch, handleInputChange, handleSearchSubmit } = useSearch();
     return (
         <>
@@ -16,7 +19,7 @@ function App () {
                 />
                 <RouterComponent firstSearch={firstSearch} />
             </div>
-            <PodcastPlayer />
+            {url !== '' && <PodcastPlayer />}
         </>
     );
 }

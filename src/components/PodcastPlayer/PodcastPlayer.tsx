@@ -9,12 +9,13 @@ export const PodcastPlayer = () => {
         isPlaying,
         volume,
         currentTime,
+        player,
         handlePlay,
         handlePause,
         handleVolumeChange,
         handleTimeChange,
     } = useContext( PlayerContext );
-
+    const { title, image, channel } = player;
     const audioRef = useRef<HTMLAudioElement | null>( null );
     useEffect( () => {
         if ( !audioRef.current ) return;
@@ -49,39 +50,56 @@ export const PodcastPlayer = () => {
         }
         handlePlay();
     };
+    const handleAudioPlay = () => {
+        handlePlay();
+    };
+    const handleAudioPause = () => {
+        handlePause();
+    };
 
     return (
         <div className={styles.player}>
-            {/* biome-ignore lint/a11y/useMediaCaption: <explanation> */}
-            <audio
-                ref={audioRef}
-                controls
-                onTimeUpdate={handleTimeUpdate}
-            />
-            {/* <button
-                onClick={handlePlay}
-                type="button"
-            >
-                <IconPlay />
-            </button> */}
-            <button
-                className={styles.runningButton}
-                onClick={handleRunning}
-                type="button"
-            >
-                {( isPlaying ) && <IconPause />}
-                {( !isPlaying ) && <IconPlay />}
-            </button>
-            <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={volume}
-                onChange={( event ) =>
-                    handleVolumeChange( event.target.valueAsNumber )
-                }
-            />
+            <figure className={styles.playerFigure}>
+                <img src={image} alt={title} />
+            </figure>
+            <div className={styles.playerContent}>
+                <h3 className={styles.playerTitle}>{title}</h3>
+                <p className={styles.playerChannel}>{channel}</p>
+                <div className={styles.playerActions}>
+                    {/* biome-ignore lint/a11y/useMediaCaption: <explanation> */}
+                    <audio
+                        ref={audioRef}
+                        controls
+                        // onPause={handleAudioPause}
+                        // onPlay={handleAudioPlay}
+                        onTimeUpdate={handleTimeUpdate}
+                    />
+                    {/* <button
+                        onClick={handlePlay}
+                        type="button"
+                    >
+                        <IconPlay />
+                    </button> */}
+                    <button
+                        className={styles.runningButton}
+                        onClick={handleRunning}
+                        type="button"
+                    >
+                        {( isPlaying ) && <IconPause />}
+                        {( !isPlaying ) && <IconPlay />}
+                    </button>
+                    <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value={volume}
+                        onChange={( event ) =>
+                            handleVolumeChange( event.target.valueAsNumber )
+                        }
+                    />
+                </div>
+            </div>
         </div>
     );
 };

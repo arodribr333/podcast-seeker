@@ -16,6 +16,7 @@ export const useXMLParser = () => {
         const xmlDoc: XmlDoc = x2js.xml2js( inputData );
         const channel: XMLChannel = xmlDoc.rss?.channel;
         const xmlItem: XmlChannelItem[] = xmlDoc.rss.channel.item;
+        const { title } = channel;
         const formatDate = ( input: string ): string => {
             const date = new Date( input );
             const day = String( date.getDate() ).padStart( 2, '0' );
@@ -28,11 +29,12 @@ export const useXMLParser = () => {
             const result = ( Math.floor( trackId * ( trackId * Math.random() ) ) ) + pub;
             return result;
         };
-        const processXmlItem = ( item: XmlChannelItem[] | XmlChannelItem ) => {
+        const processXmlItem = ( item: XmlChannelItem[] | XmlChannelItem, channelTitle: string ) => {
             if ( Array.isArray( item ) ) {
                 const XmlMappedItems = xmlItem.map( ( item ) => {
                     return {
                         id: getItemId( item.pubDate ),
+                        channel: channelTitle,
                         duration: item.duration?.__text,
                         audio: item.enclosure?._url,
                         episode: item.episode?.__text,
@@ -47,6 +49,7 @@ export const useXMLParser = () => {
             const { duration, enclosure, episode, image, season, title, pubDate } = item;
             const compose = {
                 id: getItemId( pubDate ),
+                channel: channelTitle,
                 duration: duration?.__text,
                 audio: enclosure?._url,
                 episode: episode?.__text,
@@ -59,7 +62,7 @@ export const useXMLParser = () => {
             composeArray.push( compose );
             return composeArray;
         };
-        const XmlMappedItems = processXmlItem( xmlItem );
+        const XmlMappedItems = processXmlItem( xmlItem, title );
         return {
             id: trackId,
             title: channel.title,

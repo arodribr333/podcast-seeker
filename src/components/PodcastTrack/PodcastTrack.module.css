@@ -6,6 +6,11 @@
     background-color: #d5d5d520;
     border-radius: 0.5rem;
     overflow: hidden;
+    box-sizing: border-box;
+}
+.track.active {
+    border: 3px solid #500b19;
+    background: #232323;
 }
 .trackImg {
     max-width: 7rem;
@@ -58,6 +63,13 @@
 .actionButton {
     margin: 0;
     border-radius: 0 0.3rem 0.3rem 0;
+}
+.actionButton:hover, .actionButton:active {
+    transform: none;
+}
+.actionButton.active {
+    background: linear-gradient(#771414, #500b19);
+    color: #b6b4b6;
 }
 .actionButton svg {
     width: 3rem;

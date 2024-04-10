@@ -13,9 +13,9 @@ export interface ProviderSearch {
     podcasts: PodcastsResponse;
 }
 export interface ProviderPlayer {
-    status: keyof typeof PlayerStatus;
-    audioId: number;
-    audioUrl: string;
+    image: string;
+    channel: string;
+    title: string;
 }
 export interface PlayerContextState {
     url: string;

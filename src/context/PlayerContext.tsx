@@ -18,9 +18,9 @@ const initialState: PlayerContextState = {
         trackId: 0
     },
     player: {
-        audioId: 0,
-        status: 'stopped',
-        audioUrl: ''
+        title: '',
+        channel: '',
+        image: ''
     }
 };
 export const PlayerContext = createContext<PlayerContextType>( {} as PlayerContextType );
