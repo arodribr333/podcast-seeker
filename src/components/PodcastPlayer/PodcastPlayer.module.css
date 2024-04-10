@@ -6,7 +6,8 @@
     position: fixed;
     bottom: 0;
     background-color: #420b50;
-    background: linear-gradient(#500b19, #771414);
+    /* background: linear-gradient(#500b19, #771414); */
+    background: linear-gradient(#3e3e3e, #212020);
     padding: 1rem 0.5rem 0.5rem;
     box-shadow: 0px -1px 13px 5px rgba(0, 0, 0, 0.5);
     display: flex;
@@ -29,7 +30,8 @@ input[type="range"] {
     display: flex;
     align-items: center;
     max-height: 2.5rem;
-    background: #420101;
+    /* background: #420101; */
+    background: #171616;
 }
 .runningButton svg {
     color: white;
@@ -41,7 +43,8 @@ input[type="range"] {
     display: flex;
     border-radius: 0.5rem;
     overflow: hidden;
-    border: 3px solid #500b19;
+    /* border: 3px solid #500b19; */
+    border: 3px solid #212020;
     box-sizing: border-box;
 }
 .playerContent {
