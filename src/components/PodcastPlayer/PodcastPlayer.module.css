@@ -20,12 +20,38 @@
     margin: 0;
 }
 audio {
-    max-width: 50%;
-    max-height: 2.5rem;
+    display: none;
 }
-input[type="range"] {
+
+input[type='range'].rangeBar {
     margin: 0;
 }
+input[type='range'].rangeBar:active {
+    transform: none;
+}
+input[type='range'].rangeBar:focus {
+    box-shadow: none;
+}
+input[type='range'].rangeBar::-webkit-slider-runnable-track, input[type='range'].rangeBar:focus::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    background: #2f020b;
+    height: 0.5rem;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+input[type='range'].rangeBar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: linear-gradient(#941919, #761125);
+    border-radius: 50%;
+}
+input[type='range'].seekBar {
+    width: 100%;
+    height: 0.625rem;
+    margin: 0;
+}
+  
 .runningButton {
     display: flex;
     align-items: center;

@@ -64,12 +64,16 @@
     margin: 0;
     border-radius: 0 0.3rem 0.3rem 0;
 }
-.actionButton:hover, .actionButton:active {
+.actionButton:hover, .actionButton:active, .actionButton:focus {
     transform: none;
+    box-shadow: none;
 }
-.actionButton.active {
+.actionButton.active, .actionButton:focus {
     background: linear-gradient(#771414, #500b19);
     color: #b6b4b6;
+}
+.actionButton:focus {
+    box-shadow: 0 0 0.5rem 0.25rem #8cfe004d;
 }
 .actionButton svg {
     width: 3rem;

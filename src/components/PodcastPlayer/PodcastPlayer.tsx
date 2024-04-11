@@ -1,7 +1,7 @@
-import { useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
-import { IconPause, IconPlay } from '../Icons/Icons';
-import styles from './PodcastPlayer.module.css';
+import { IconPause, IconPlay } from "../Icons/Icons";
+import styles from "./PodcastPlayer.module.css";
 
 export const PodcastPlayer = () => {
     const {
@@ -17,10 +17,17 @@ export const PodcastPlayer = () => {
     } = useContext( PlayerContext );
     const { title, image, channel } = player;
     const audioRef = useRef<HTMLAudioElement | null>( null );
+    const [ duration, setDuration ] = useState( 0 );
+    const [ totalTime, setTotalTime ] = useState<string>( '' );
+    const [ runningTime, setRunningTime ] = useState<string>( '' );
     useEffect( () => {
         if ( !audioRef.current ) return;
 
         const audio = audioRef.current;
+        const audioInfo = new Audio( url );
+        audioInfo.onloadedmetadata = () => {
+            setDuration( audioInfo.duration );
+        };
         audio.src = url;
         audio.volume = volume;
         audio.currentTime = currentTime;
@@ -34,7 +41,25 @@ export const PodcastPlayer = () => {
             audio.pause();
             audio.src = "";
         };
-    }, [ url, isPlaying, volume ] );
+    }, [ url, isPlaying ] );
+
+    const formatTime = useCallback( ( seconds: number ) => {
+        const horas = Math.floor( seconds / 3600 );
+        const minutes = Math.floor( ( seconds % 3600 ) / 60 );
+        const secondsLeft = Math.floor( ( seconds % 3600 ) % 60 );
+        return `${ horas.toString().padStart( 2, "0" ) }:${ minutes.toString().padStart( 2, "0" ) }:${ secondsLeft
+            .toString()
+            .padStart( 2, "0" ) }`;
+    }, [] );
+
+    const formatTotalTime = useCallback( ( duration: number ) => {
+        if ( !duration ) return "--:--";
+        return formatTime( duration );
+    }, [] );
+    useEffect( () => {
+        const total = formatTotalTime( duration );
+        setTotalTime( total );
+    }, [ duration ] );
     const handleTimeUpdate = (
         event: React.SyntheticEvent<HTMLAudioElement>,
     ) => {
@@ -50,54 +75,70 @@ export const PodcastPlayer = () => {
         }
         handlePlay();
     };
-    const handleAudioPlay = () => {
-        handlePlay();
+    const onVolumeChange = ( volume: number ) => {
+        if ( !audioRef.current ) return;
+        const newVolume = volume;
+        audioRef.current.volume = newVolume;
+        handleVolumeChange( newVolume );
     };
-    const handleAudioPause = () => {
-        handlePause();
+    const onTimeChange = ( time: number ) => {
+        const audio = audioRef.current;
+        if ( !audio ) return;
+        const newTime = time;
+        audio.currentTime = newTime;
+        setDuration( audio.duration );
+        handleTimeChange( currentTime );
     };
-
     return (
         <div className={styles.player}>
             <figure className={styles.playerFigure}>
-                <img src={image} alt={title} />
+                <img
+                    src={image}
+                    alt={title}
+                />
             </figure>
             <div className={styles.playerContent}>
                 <h3 className={styles.playerTitle}>{title}</h3>
                 <p className={styles.playerChannel}>{channel}</p>
+                {/* biome-ignore lint/a11y/useMediaCaption: <explanation> */}
+                <audio
+                    ref={audioRef}
+                    controls
+                    onTimeUpdate={handleTimeUpdate}
+                />
                 <div className={styles.playerActions}>
-                    {/* biome-ignore lint/a11y/useMediaCaption: <explanation> */}
-                    <audio
-                        ref={audioRef}
-                        controls
-                        // onPause={handleAudioPause}
-                        // onPlay={handleAudioPlay}
-                        onTimeUpdate={handleTimeUpdate}
-                    />
-                    {/* <button
-                        onClick={handlePlay}
-                        type="button"
-                    >
-                        <IconPlay />
-                    </button> */}
                     <button
                         className={styles.runningButton}
                         onClick={handleRunning}
                         type="button"
                     >
-                        {( isPlaying ) && <IconPause />}
-                        {( !isPlaying ) && <IconPlay />}
+                        {isPlaying && <IconPause />}
+                        {!isPlaying && <IconPlay />}
                     </button>
                     <input
+                        className={styles.rangeBar}
                         type="range"
                         min="0"
                         max="1"
                         step="0.01"
                         value={volume}
                         onChange={( event ) =>
-                            handleVolumeChange( event.target.valueAsNumber )
+                            onVolumeChange( event.target.valueAsNumber )
                         }
                     />
+                </div>
+                <div>
+                    <input
+                        className={`${ styles.rangeBar } ${ styles.seekBar }`}
+                        type="range"
+                        min="0"
+                        max={audioRef.current?.duration || 0}
+                        value={currentTime}
+                        onChange={( event ) =>
+                            onTimeChange( event.target.valueAsNumber )
+                        }
+                    />
+                    <p>{totalTime}</p>
                 </div>
             </div>
         </div>
