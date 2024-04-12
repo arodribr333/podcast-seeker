@@ -9,7 +9,8 @@
     box-sizing: border-box;
 }
 .track.active {
-    border: 3px solid #500b19;
+    /* border: 3px solid #500b19; */
+    box-shadow: inset 0px 0px 0 3px #510B19;
     background: #232323;
 }
 .trackImg {

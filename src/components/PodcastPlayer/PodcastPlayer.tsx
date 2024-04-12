@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
-import { IconPause, IconPlay } from "../Icons/Icons";
+import { IconPause, IconPlay, IconVolume, IconVolumeOff, IconVolumeOn } from "../Icons/Icons";
 import styles from "./PodcastPlayer.module.css";
 
 export const PodcastPlayer = () => {
@@ -19,7 +19,7 @@ export const PodcastPlayer = () => {
     const audioRef = useRef<HTMLAudioElement | null>( null );
     const [ duration, setDuration ] = useState( 0 );
     const [ totalTime, setTotalTime ] = useState<string>( '' );
-    const [ runningTime, setRunningTime ] = useState<string>( '' );
+    const [ mute, setMute ] = useState<boolean>( false );
     useEffect( () => {
         if ( !audioRef.current ) return;
 
@@ -42,6 +42,16 @@ export const PodcastPlayer = () => {
             audio.src = "";
         };
     }, [ url, isPlaying ] );
+    useEffect( () => {
+        if ( !audioRef.current ) return;
+        const audio = audioRef.current;
+        audio.volume = volume;
+        if ( volume === 0 ) {
+            setMute( true );
+            return;
+        }
+        setMute( false );
+    }, [ volume ] );
 
     const formatTime = useCallback( ( seconds: number ) => {
         const horas = Math.floor( seconds / 3600 );
@@ -74,6 +84,17 @@ export const PodcastPlayer = () => {
             return;
         }
         handlePlay();
+    };
+    const handleSwitchMute = () => {
+        if ( !audioRef.current ) return;
+        const audio = audioRef.current;
+        if ( volume > 0 && ( audio.volume === volume ) ) {
+            audio.volume = 0;
+            setMute( true );
+            return;
+        }
+        audio.volume = volume;
+        setMute( false );
     };
     const onVolumeChange = ( volume: number ) => {
         if ( !audioRef.current ) return;
@@ -108,24 +129,43 @@ export const PodcastPlayer = () => {
                 />
                 <div className={styles.playerActions}>
                     <button
-                        className={styles.runningButton}
+                        title={`${ ( isPlaying && 'Pause' ) || ( !isPlaying && 'Play' ) }`}
+                        className={styles.playerButton}
                         onClick={handleRunning}
                         type="button"
                     >
                         {isPlaying && <IconPause />}
                         {!isPlaying && <IconPlay />}
                     </button>
-                    <input
-                        className={styles.rangeBar}
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value={volume}
-                        onChange={( event ) =>
-                            onVolumeChange( event.target.valueAsNumber )
-                        }
-                    />
+                    <div className={styles.volumeControl}>
+                        <button
+                            className={`${ styles.playerButton } ${ styles.volumeHandler }`}
+                            title='Desplegar regulador de volumen'
+                            type="button"
+                        >
+                            <IconVolume />
+                        </button>
+                        <input
+                            className={`${ styles.rangeBar } ${ styles.volumeRange }`}
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={volume}
+                            onChange={( event ) =>
+                                onVolumeChange( event.target.valueAsNumber )
+                            }
+                        />
+                    </div>
+                    <button
+                        className={styles.playerButton}
+                        title={`${ ( mute && 'Unmute' ) || ( !mute && 'Mute' ) }`}
+                        onClick={handleSwitchMute}
+                        type="button"
+                    >
+                        {mute && <IconVolumeOn />}
+                        {!mute && <IconVolumeOff />}
+                    </button>
                 </div>
                 <div>
                     <input

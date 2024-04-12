@@ -10,6 +10,7 @@ function App () {
     const { search, error, firstSearch, handleInputChange, handleSearchSubmit } = useSearch();
     return (
         <>
+            {url !== '' && <PodcastPlayer />}
             <div className={styles.page}>
                 <HeaderSeeker
                     search={search}
@@ -19,7 +20,6 @@ function App () {
                 />
                 <RouterComponent firstSearch={firstSearch} />
             </div>
-            {url !== '' && <PodcastPlayer />}
         </>
     );
 }

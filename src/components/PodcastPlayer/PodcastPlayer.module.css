@@ -34,7 +34,7 @@ input[type='range'].rangeBar:focus {
 }
 input[type='range'].rangeBar::-webkit-slider-runnable-track, input[type='range'].rangeBar:focus::-webkit-slider-runnable-track {
     -webkit-appearance: none;
-    background: #2f020b;
+    background: #c3c3c3;
     height: 0.5rem;
     width: 100%;
     border-radius: 0.5rem;
@@ -43,8 +43,9 @@ input[type='range'].rangeBar::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 1.25rem;
     height: 1.25rem;
-    background: linear-gradient(#941919, #761125);
+    background: linear-gradient(#8d8d8d, #767676);
     border-radius: 50%;
+    transform: translateY(0.05rem);
 }
 input[type='range'].seekBar {
     width: 100%;
@@ -93,5 +94,59 @@ input[type='range'].seekBar {
 }
 .playerActions {
     display: flex;
-    justify-content: space-between;    
+    justify-content: center;
+    gap: 1rem;  
+}
+.playerButton {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    padding: 0;
+}
+.playerButton:hover, .playerButton:active, .playerButton:focus {
+    background: #530000;
+} 
+.playerButton svg {
+    color: white;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+.volumeControl {
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+.volumeHandler + input[type='range'].volumeRange {
+    background: #171616;
+    filter: opacity(0);
+    visibility: hidden;
+}
+.volumeHandler {
+    transition: all 0.15s ease-in;
+    position: absolute;
+    z-index: 1;
+}
+.volumeControl:hover .volumeHandler {
+    background: #530000;
+}
+.volumeControl:hover .volumeHandler + input[type='range'].volumeRange {
+    background: #530000;
+    filter: opacity(1);
+    visibility: visible;
+}
+input[type='range'].volumeRange {
+    padding: 1rem 1rem 1rem 3rem;
+    background: #171616;
+    transition: all 0.15s ease-in;
+}
+input[type='range'].volumeRange, input[type='range'].volumeRange:active , input[type='range'].volumeRange:focus {
+    transform: rotate(270deg) translate(5rem, -4.74rem);
+    border-radius: 5rem;
+    width: 8rem;
+    position: absolute;
+    bottom: 0;
 }
