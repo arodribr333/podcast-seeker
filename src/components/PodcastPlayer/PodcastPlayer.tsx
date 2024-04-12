@@ -20,6 +20,7 @@ export const PodcastPlayer = () => {
     const [ duration, setDuration ] = useState( 0 );
     const [ totalTime, setTotalTime ] = useState<string>( '' );
     const [ mute, setMute ] = useState<boolean>( false );
+    const [ currentShown, setCurrentShown ] = useState<string>( '' );
     useEffect( () => {
         if ( !audioRef.current ) return;
 
@@ -66,6 +67,13 @@ export const PodcastPlayer = () => {
         if ( !duration ) return "--:--";
         return formatTime( duration );
     }, [] );
+
+    useEffect( () => {
+        if ( currentTime === duration ) return;
+        const time = formatTotalTime( currentTime );
+        setCurrentShown( time );
+    }, [ currentTime ] );
+
     useEffect( () => {
         const total = formatTotalTime( duration );
         setTotalTime( total );
@@ -178,7 +186,7 @@ export const PodcastPlayer = () => {
                             onTimeChange( event.target.valueAsNumber )
                         }
                     />
-                    <p>{totalTime}</p>
+                    <p className={styles.time}>{currentShown}/{totalTime}</p>
                 </div>
             </div>
         </div>

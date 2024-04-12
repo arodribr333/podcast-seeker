@@ -150,3 +150,6 @@ input[type='range'].volumeRange, input[type='range'].volumeRange:active , input[
     position: absolute;
     bottom: 0;
 }
+.time {
+    text-align: right;
+}
