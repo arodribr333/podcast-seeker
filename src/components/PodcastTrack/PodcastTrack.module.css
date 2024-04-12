@@ -10,7 +10,7 @@
 }
 .track.active {
     /* border: 3px solid #500b19; */
-    box-shadow: inset 0px 0px 0 3px #510B19;
+    box-shadow: inset 0px 0px 0 3px #24043c;
     background: #232323;
 }
 .trackImg {
@@ -68,9 +68,11 @@
 .actionButton:hover, .actionButton:active, .actionButton:focus {
     transform: none;
     box-shadow: none;
+    background: linear-gradient(#421477, #24043c);
 }
-.actionButton.active, .actionButton:focus {
-    background: linear-gradient(#771414, #500b19);
+.actionButton.active {
+    /* background: linear-gradient(#771414, #500b19); */
+    background: linear-gradient(#421477, #24043c);
     color: #b6b4b6;
 }
 .actionButton:focus {

@@ -7,7 +7,8 @@
     bottom: 0;
     background-color: #420b50;
     /* background: linear-gradient(#500b19, #771414); */
-    background: linear-gradient(#3e3e3e, #212020);
+    /* background: linear-gradient(#3e3e3e, #212020); */
+    background: linear-gradient(#421477, #24043c);
     padding: 1rem 0.5rem 0.5rem;
     box-shadow: 0px -1px 13px 5px rgba(0, 0, 0, 0.5);
     display: flex;
@@ -15,6 +16,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 1rem;
+    z-index: 1;
 }
 .player * {
     margin: 0;
