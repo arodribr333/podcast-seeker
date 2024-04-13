@@ -122,7 +122,7 @@ input[type='range'].seekBar {
     width: 2.5rem;
     height: 2.5rem;
 }
-.volumeHandler + input[type='range'].volumeRange {
+input[type='range'].volumeRange {
     background: #171616;
     filter: opacity(0);
     visibility: hidden;
@@ -135,14 +135,13 @@ input[type='range'].seekBar {
 .volumeControl:hover .volumeHandler {
     background: #530000;
 }
-.volumeControl:hover .volumeHandler + input[type='range'].volumeRange {
+.volumeControl:hover input[type='range'].volumeRange {
     background: #530000;
     filter: opacity(1);
     visibility: visible;
 }
 input[type='range'].volumeRange {
     padding: 1rem 1rem 1rem 3rem;
-    background: #171616;
     transition: all 0.15s ease-in;
 }
 input[type='range'].volumeRange, input[type='range'].volumeRange:active , input[type='range'].volumeRange:focus {

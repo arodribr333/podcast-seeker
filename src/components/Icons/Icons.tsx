@@ -88,3 +88,23 @@ export const IconVolumeOff = () => {
 		</svg>
 	);
 };
+
+export const IconTimeForward = () => {
+	return (
+		// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+			<path fill="currentColor" d="M8 4H7v5h4V8H8z" />
+			<path fill="currentColor" d="M16 7V3l-1.1 1.1C13.6 1.6 11 0 8 0C3.6 0 0 3.6 0 8s3.6 8 8 8c2.4 0 4.6-1.1 6-2.8l-1.5-1.3C11.4 13.2 9.8 14 8 14c-3.3 0-6-2.7-6-6s2.7-6 6-6c2.4 0 4.5 1.5 5.5 3.5L12 7z" />
+		</svg>
+	);
+};
+
+export const IconTimeBackward = () => {
+	return (
+		// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+			<path fill="currentColor" d="M8 4H7v5h4V8H8z" />
+			<path fill="currentColor" d="M8 0C5 0 2.4 1.6 1.1 4.1L0 3v4h4L2.5 5.5C3.5 3.5 5.6 2 8 2c3.3 0 6 2.7 6 6s-2.7 6-6 6c-1.8 0-3.4-.8-4.5-2.1L2 13.2C3.4 14.9 5.6 16 8 16c4.4 0 8-3.6 8-8s-3.6-8-8-8" />
+		</svg>
+	);
+};

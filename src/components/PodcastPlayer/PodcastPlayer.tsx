@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { PlayerContext } from "../../context/PlayerContext";
-import { IconPause, IconPlay, IconVolume, IconVolumeOff, IconVolumeOn } from "../Icons/Icons";
+import { IconPause, IconPlay, IconTimeBackward, IconTimeForward, IconVolume, IconVolumeOff, IconVolumeOn } from "../Icons/Icons";
 import styles from "./PodcastPlayer.module.css";
 
 export const PodcastPlayer = () => {
@@ -64,7 +64,7 @@ export const PodcastPlayer = () => {
     }, [] );
 
     const formatTotalTime = useCallback( ( duration: number ) => {
-        if ( !duration ) return "--:--";
+        if ( !duration ) return "00:00:00";
         return formatTime( duration );
     }, [] );
 
@@ -118,6 +118,13 @@ export const PodcastPlayer = () => {
         setDuration( audio.duration );
         handleTimeChange( currentTime );
     };
+    const handleModifiedTime = ( amount: number ) => {
+        const audio = audioRef.current;
+        if ( !audio ) return;
+        const newTime = currentTime + ( amount );
+        audio.currentTime = newTime;
+        handleTimeChange( newTime );
+    };
     return (
         <div className={styles.player}>
             <figure className={styles.playerFigure}>
@@ -137,6 +144,15 @@ export const PodcastPlayer = () => {
                 />
                 <div className={styles.playerActions}>
                     <button
+                        title='Return 10 seconds'
+                        className={styles.playerButton}
+                        onClick={() => handleModifiedTime( -10 )}
+                        disabled={!isPlaying}
+                        type="button"
+                    >
+                        <IconTimeBackward />
+                    </button>
+                    <button
                         title={`${ ( isPlaying && 'Pause' ) || ( !isPlaying && 'Play' ) }`}
                         className={styles.playerButton}
                         onClick={handleRunning}
@@ -145,10 +161,28 @@ export const PodcastPlayer = () => {
                         {isPlaying && <IconPause />}
                         {!isPlaying && <IconPlay />}
                     </button>
+                    <button
+                        title='Advance 10 seconds'
+                        className={styles.playerButton}
+                        onClick={() => handleModifiedTime( 10 )}
+                        disabled={!isPlaying}
+                        type="button"
+                    >
+                        <IconTimeForward />
+                    </button>
+                    <button
+                        className={styles.playerButton}
+                        title={`${ ( mute && 'Unmute' ) || ( !mute && 'Mute' ) }`}
+                        onClick={handleSwitchMute}
+                        type="button"
+                    >
+                        {mute && <IconVolumeOn />}
+                        {!mute && <IconVolumeOff />}
+                    </button>
                     <div className={styles.volumeControl}>
                         <button
                             className={`${ styles.playerButton } ${ styles.volumeHandler }`}
-                            title='Desplegar regulador de volumen'
+                            title='Display volume regulator'
                             type="button"
                         >
                             <IconVolume />
@@ -165,15 +199,6 @@ export const PodcastPlayer = () => {
                             }
                         />
                     </div>
-                    <button
-                        className={styles.playerButton}
-                        title={`${ ( mute && 'Unmute' ) || ( !mute && 'Mute' ) }`}
-                        onClick={handleSwitchMute}
-                        type="button"
-                    >
-                        {mute && <IconVolumeOn />}
-                        {!mute && <IconVolumeOff />}
-                    </button>
                 </div>
                 <div>
                     <input
