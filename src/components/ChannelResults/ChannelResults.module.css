@@ -12,7 +12,7 @@
 .info {
     display: flex;
     flex-flow: row nowrap;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
     padding: 1rem;
     background-color: #63637175;
