@@ -16,31 +16,25 @@ export const PodcastTrack = ( { item }: PodcastTrackProps ) => {
         handlePlay,
         handlePause,
     } = useContext( PlayerContext );
+
     const [ trackRunning, setTrackRunning ] = useState( false );
+
     useEffect( () => {
-        if ( isPlaying && url === item.audio ) {
-            setTrackRunning( true );
-            return;
-        }
-        setTrackRunning( false );
-    }, [ isPlaying, url ] );
+        setTrackRunning( isPlaying && url === item.audio );
+    }, [ isPlaying, url, item.audio ] );
+
     const handleAddTrack = () => {
-        const { title, image, channel } = item;
+        const { title, image, channel, audio } = item;
         handleTimeChange( 0 );
         handlePlayer( { title, image, channel } );
-        handleUrlChange( item.audio );
-        // if ( isPlaying ) {
-        // 	handlePause();
-        // 	return;
-        // };
-        // handlePlay();
-        // };
+        handleUrlChange( audio );
+        trackRunning ? handlePause() : handlePlay();
     };
+
+    const trackClass = `${ styles.track } ${ trackRunning ? styles.active : '' }`;
+
     return (
-        <article
-            // className={styles.track}
-            className={`${ styles.track } ${ trackRunning && styles.active }`}
-        >
+        <article className={trackClass}>
             <div className={styles.trackItem}>
                 <img
                     className={styles.trackImg}
@@ -53,7 +47,7 @@ export const PodcastTrack = ( { item }: PodcastTrackProps ) => {
                         <p className={styles.date}>
                             <IconCalendar /> {item.date}
                         </p>
-                        {item.duration.includes( ":" ) && (
+                        {item.duration.includes( ':' ) && (
                             <p className={styles.trackDuration}>
                                 <IconTime /> {item.duration}
                             </p>
@@ -69,15 +63,12 @@ export const PodcastTrack = ( { item }: PodcastTrackProps ) => {
                 </div>
             </div>
             <button
-                // className={`${trackRuninng ? ${styles.active} ${styles.actionButton} : ${styles.actionButton}}`}
-                className={`${ styles.actionButton } ${ trackRunning && styles.active
-                    }`}
+                className={`${ styles.actionButton } ${ trackRunning ? styles.active : '' }`}
                 title={item.title}
                 type="button"
                 onClick={handleAddTrack}
             >
-                {trackRunning && <IconPause />}
-                {!trackRunning && <IconPlay />}
+                {trackRunning ? <IconPause /> : <IconPlay />}
             </button>
         </article>
     );

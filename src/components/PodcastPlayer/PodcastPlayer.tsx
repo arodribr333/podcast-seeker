@@ -21,13 +21,14 @@ export const PodcastPlayer = () => {
     const [ totalTime, setTotalTime ] = useState<string>( '' );
     const [ mute, setMute ] = useState<boolean>( false );
     const [ currentShown, setCurrentShown ] = useState<string>( '' );
+
     useEffect( () => {
         if ( !audioRef.current ) return;
 
         const audio = audioRef.current;
-        const audioInfo = new Audio( url );
-        audioInfo.onloadedmetadata = () => {
-            setDuration( audioInfo.duration );
+        const newAudio = new Audio( url );
+        newAudio.onloadedmetadata = () => {
+            setDuration( newAudio.duration );
         };
         audio.src = url;
         audio.volume = volume;
@@ -42,34 +43,21 @@ export const PodcastPlayer = () => {
             audio.pause();
             audio.src = "";
         };
-    }, [ url, isPlaying ] );
+    }, [ url ] );
+
     useEffect( () => {
         if ( !audioRef.current ) return;
+
         const audio = audioRef.current;
         audio.volume = volume;
         if ( volume === 0 ) {
             setMute( true );
-            return;
+        } else {
+            setMute( false );
         }
-        setMute( false );
     }, [ volume ] );
 
-    const formatTime = useCallback( ( seconds: number ) => {
-        const horas = Math.floor( seconds / 3600 );
-        const minutes = Math.floor( ( seconds % 3600 ) / 60 );
-        const secondsLeft = Math.floor( ( seconds % 3600 ) % 60 );
-        return `${ horas.toString().padStart( 2, "0" ) }:${ minutes.toString().padStart( 2, "0" ) }:${ secondsLeft
-            .toString()
-            .padStart( 2, "0" ) }`;
-    }, [] );
-
-    const formatTotalTime = useCallback( ( duration: number ) => {
-        if ( !duration ) return "00:00:00";
-        return formatTime( duration );
-    }, [] );
-
     useEffect( () => {
-        if ( currentTime === duration ) return;
         const time = formatTotalTime( currentTime );
         setCurrentShown( time );
     }, [ currentTime ] );
@@ -78,60 +66,89 @@ export const PodcastPlayer = () => {
         const total = formatTotalTime( duration );
         setTotalTime( total );
     }, [ duration ] );
-    const handleTimeUpdate = (
-        event: React.SyntheticEvent<HTMLAudioElement>,
-    ) => {
+
+    useEffect( () => {
+        if ( !audioRef.current ) return;
+        const audio = audioRef.current;
+        if ( isPlaying ) {
+            handlePlay();
+            audio.play();
+        } else {
+            handlePause();
+            audio.pause();
+        }
+    }, [ isPlaying ] );
+
+    const formatTime = useCallback( ( seconds: number ) => {
+        const hours = Math.floor( seconds / 3600 );
+        const minutes = Math.floor( ( seconds % 3600 ) / 60 );
+        const secondsLeft = Math.floor( ( seconds % 3600 ) % 60 );
+        return `${ hours.toString().padStart( 2, "0" ) }:${ minutes.toString().padStart( 2, "0" ) }:${ secondsLeft.toString().padStart( 2, "0" ) }`;
+    }, [] );
+
+    const formatTotalTime = useCallback( ( duration: number ) => {
+        if ( !duration ) return "00:00:00";
+        return formatTime( duration );
+    }, [ formatTime ] );
+
+    const handleTimeUpdate = ( event: React.SyntheticEvent<HTMLAudioElement> ) => {
         if ( !audioRef.current ) return;
 
         const audio = audioRef.current;
         handleTimeChange( audio.currentTime );
     };
+
     const handleRunning = () => {
         if ( isPlaying ) {
             handlePause();
-            return;
+        } else {
+            handlePlay();
         }
-        handlePlay();
     };
+
     const handleSwitchMute = () => {
         if ( !audioRef.current ) return;
+
         const audio = audioRef.current;
-        if ( volume > 0 && ( audio.volume === volume ) ) {
+        if ( volume > 0 && audio.volume === volume ) {
             audio.volume = 0;
             setMute( true );
-            return;
+        } else {
+            audio.volume = volume;
+            setMute( false );
         }
-        audio.volume = volume;
-        setMute( false );
     };
+
     const onVolumeChange = ( volume: number ) => {
         if ( !audioRef.current ) return;
+
         const newVolume = volume;
         audioRef.current.volume = newVolume;
         handleVolumeChange( newVolume );
     };
+
     const onTimeChange = ( time: number ) => {
+        if ( !audioRef.current ) return;
+
         const audio = audioRef.current;
-        if ( !audio ) return;
         const newTime = time;
-        audio.currentTime = newTime;
-        setDuration( audio.duration );
-        handleTimeChange( currentTime );
-    };
-    const handleModifiedTime = ( amount: number ) => {
-        const audio = audioRef.current;
-        if ( !audio ) return;
-        const newTime = currentTime + ( amount );
         audio.currentTime = newTime;
         handleTimeChange( newTime );
     };
+
+    const handleModifiedTime = ( amount: number ) => {
+        if ( !audioRef.current ) return;
+
+        const audio = audioRef.current;
+        const newTime = currentTime + amount;
+        audio.currentTime = newTime;
+        handleTimeChange( newTime );
+    };
+
     return (
         <div className={styles.player}>
             <figure className={styles.playerFigure}>
-                <img
-                    src={image}
-                    alt={title}
-                />
+                <img src={image} alt={title} />
             </figure>
             <div className={styles.playerContent}>
                 <h3 className={styles.playerTitle}>{title}</h3>
@@ -153,13 +170,12 @@ export const PodcastPlayer = () => {
                         <IconTimeBackward />
                     </button>
                     <button
-                        title={`${ ( isPlaying && 'Pause' ) || ( !isPlaying && 'Play' ) }`}
+                        title={`${ isPlaying ? 'Pause' : 'Play' }`}
                         className={styles.playerButton}
                         onClick={handleRunning}
                         type="button"
                     >
-                        {isPlaying && <IconPause />}
-                        {!isPlaying && <IconPlay />}
+                        {isPlaying ? <IconPause /> : <IconPlay />}
                     </button>
                     <button
                         title='Advance 10 seconds'
@@ -172,12 +188,11 @@ export const PodcastPlayer = () => {
                     </button>
                     <button
                         className={styles.playerButton}
-                        title={`${ ( mute && 'Unmute' ) || ( !mute && 'Mute' ) }`}
+                        title={`${ mute ? 'Unmute' : 'Mute' }`}
                         onClick={handleSwitchMute}
                         type="button"
                     >
-                        {mute && <IconVolumeOn />}
-                        {!mute && <IconVolumeOff />}
+                        {mute ? <IconVolumeOn /> : <IconVolumeOff />}
                     </button>
                     <div className={styles.volumeControl}>
                         <button
