@@ -1,12 +1,12 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { PlayerContext } from "../context/PlayerContext";
-import { SearchPodcasts } from "../services/SearchPodcasts";
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { PlayerContext } from '../context/PlayerContext';
+import { SearchPodcasts } from '../services/SearchPodcasts';
 
 export const useSearch = () => {
 	const { handleSearchUsedChange } = useContext( PlayerContext );
 	const [ firstSearch, setFirstSearch ] = useState( true );
-	const [ search, updateSearch ] = useState( "" );
+	const [ search, updateSearch ] = useState( '' );
 	const [ error, setError ] = useState<string | null>( null );
 	const isFirstRender = useRef( true );
 	const navigate = useNavigate();
@@ -17,6 +17,10 @@ export const useSearch = () => {
 		event: React.FormEvent<HTMLFormElement>,
 	): Promise<void> => {
 		event.preventDefault();
+		if ( search === '' ) {
+			handleSearchTerm();
+			return;
+		}
 		await SearchPodcasts( { search } ).then( ( podcasts ) => {
 			handleSearchUsedChange( {
 				hasResults: podcasts.resultCount > 0,
@@ -26,24 +30,27 @@ export const useSearch = () => {
 			return podcasts;
 		} );
 		firstSearch && setFirstSearch( false );
-		if ( window.location.pathname === "/" ) return;
-		navigate( "/" );
+		if ( window.location.pathname === '/' ) return;
+		navigate( '/' );
 	};
-	useEffect( () => {
-		if ( isFirstRender.current ) {
-			isFirstRender.current = search === "";
-			return;
-		}
-		if ( search === "" ) {
-			setError( "No se puede buscar un string vacío" );
+	const handleSearchTerm = useCallback( () => {
+		if ( search === '' ) {
+			setError( "You can't do an empty search" );
 			return;
 		}
 		if ( search.length < 3 ) {
-			setError( "La búsqueda debe contener al menos 3 caracteres" );
+			setError( 'The search must contain at least 3 characters' );
 			return;
 		}
-		setError( null );
 	}, [ search ] );
+	useEffect( () => {
+		if ( isFirstRender.current ) {
+			isFirstRender.current = search === '';
+			return;
+		}
+		handleSearchTerm();
+		setError( null );
+	}, [ search, handleSearchTerm ] );
 	return {
 		search,
 		error,

@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
-import { PlayerContext } from "../../context/PlayerContext";
-import type { MappedXmlChannelItem } from "../../types/types";
-import { IconCalendar, IconPause, IconPlay, IconTime } from "../Icons/Icons";
-import styles from "./PodcastTrack.module.css";
+import { useContext, useEffect, useState } from 'react';
+import { PlayerContext } from '../../context/PlayerContext';
+import type { MappedXmlChannelItem } from '../../types/types';
+import { IconCalendar, IconPause, IconPlay, IconTime } from '../Icons/Icons';
+import styles from './PodcastTrack.module.css';
 interface PodcastTrackProps {
     item: MappedXmlChannelItem;
 }
@@ -63,7 +63,8 @@ export const PodcastTrack = ( { item }: PodcastTrackProps ) => {
                 </div>
             </div>
             <button
-                className={`${ styles.actionButton } ${ trackRunning ? styles.active : '' }`}
+                className={`${ styles.actionButton } ${ trackRunning ? styles.active : ''
+                    }`}
                 title={item.title}
                 type="button"
                 onClick={handleAddTrack}

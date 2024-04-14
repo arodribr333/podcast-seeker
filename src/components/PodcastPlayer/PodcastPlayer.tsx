@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import { PlayerContext } from "../../context/PlayerContext";
-import { usePodcastPlayer } from "../../hooks/usePodcastPlayer";
+import { useContext } from 'react';
+import { PlayerContext } from '../../context/PlayerContext';
+import { usePodcastPlayer } from '../../hooks/usePodcastPlayer';
 import {
     IconCollapsePlayer,
     IconPause,
@@ -11,8 +11,8 @@ import {
     IconVolume,
     IconVolumeOff,
     IconVolumeOn,
-} from "../Icons/Icons";
-import styles from "./PodcastPlayer.module.css";
+} from '../Icons/Icons';
+import styles from './PodcastPlayer.module.css';
 export const PodcastPlayer = () => {
     const { isPlaying, volume, currentTime, player } =
         useContext( PlayerContext );
@@ -34,12 +34,12 @@ export const PodcastPlayer = () => {
 
     return (
         <div
-            className={`${ styles.player } ${ collapsed ? styles.collapsed : "" }`}
+            className={`${ styles.player } ${ collapsed ? styles.collapsed : '' }`}
         >
             <button
                 className={styles.buttonCollapseStatus}
                 type="button"
-                title={collapsed ? "Uncollapse" : "Collapse"}
+                title={collapsed ? 'Uncollapse' : 'Collapse'}
                 onClick={handleCollapsePlayer}
             >
                 {collapsed ? <IconUnCollapsePlayer /> : <IconCollapsePlayer />}
@@ -70,7 +70,7 @@ export const PodcastPlayer = () => {
                         <IconTimeBackward />
                     </button>
                     <button
-                        title={`${ isPlaying ? "Pause" : "Play" }`}
+                        title={`${ isPlaying ? 'Pause' : 'Play' }`}
                         className={styles.playerButton}
                         onClick={handleRunning}
                         type="button"
@@ -88,7 +88,7 @@ export const PodcastPlayer = () => {
                     </button>
                     <button
                         className={styles.playerButton}
-                        title={`${ mute ? "Unmute" : "Mute" }`}
+                        title={`${ mute ? 'Unmute' : 'Mute' }`}
                         onClick={handleSwitchMute}
                         type="button"
                     >

@@ -6,12 +6,10 @@ export const useAudio = ( url: string ) => {
 
     const togglePlay = () => setPlaying( !playing );
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect( () => {
         playing ? audio.play() : audio.pause();
     }, [ playing ] );
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect( () => {
         audio.addEventListener( "ended", () => setPlaying( false ) );
         return () => {

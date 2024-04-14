@@ -1,16 +1,15 @@
-import { useContext, useEffect, useState } from "react";
-import { PlayerContext } from "../../context/PlayerContext";
-import { useChannels } from "../../hooks/useChannels";
-import type { ReturnedChannel } from "../../types/types";
-import { IconError } from "../Icons/Icons";
-import { PodcastTrack } from "../PodcastTrack/PodcastTrack";
-import styles from "./ChannelResults.module.css";
+import { useContext, useEffect, useState } from 'react';
+import { PlayerContext } from '../../context/PlayerContext';
+import { useChannels } from '../../hooks/useChannels';
+import type { ReturnedChannel } from '../../types/types';
+import { IconError } from '../Icons/Icons';
+import { PodcastTrack } from '../PodcastTrack/PodcastTrack';
+import styles from './ChannelResults.module.css';
 export const ChannelResults = () => {
     const { channelUsed } = useContext( PlayerContext );
     const { feedUrl, trackId } = channelUsed;
     const { getChannel } = useChannels();
     const [ channel, setChannel ] = useState<Error | ReturnedChannel>();
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect( () => {
         try {
             getChannel( { feedUrl, trackId } ).then( ( data ) => setChannel( data ) );
