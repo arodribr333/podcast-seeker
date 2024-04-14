@@ -18,6 +18,25 @@
     gap: 1rem;
     z-index: 1;
 }
+.player.collapsed .playerContent {
+    gap: 0.5rem;
+    order: 1;
+}
+.player.collapsed .playerActions {
+    gap: 0.5rem;
+    order: 1;
+}
+.player.collapsed .timeHandler {
+    display: flex;
+    flex-basis: 50%;
+    gap: 0.5rem;
+    align-items: center;
+}
+.player.collapsed .playerFigure,
+.player.collapsed .playerTitle,
+.player.collapsed .playerChannel {
+    display: none;
+}
 .player * {
     margin: 0;
 }
@@ -153,4 +172,40 @@ input[type='range'].volumeRange, input[type='range'].volumeRange:active , input[
 }
 .time {
     text-align: right;
+}
+.buttonCollapseStatus {
+    background: linear-gradient(#7639a4, #421477);
+    padding: 0.2rem 0.6rem;
+    position: absolute;
+    bottom: 100%;
+    right: 1rem;
+    transform: translate(0, 0.5rem);
+    color: white;
+}
+button.buttonCollapseStatus:hover,
+button.buttonCollapseStatus:active
+button.buttonCollapseStatus:focus {
+    background: linear-gradient(#3977a4, #421477);
+    transform: translate(0, 0.5rem);
+    /* color: #54c900; */
+    box-shadow: none;
+    border: none;
+}
+.buttonCollapseStatus svg{
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+
+@media screen and (width < 48rem) {
+    .player .playerActions {
+        gap: 0.5rem;
+    }
+    .player.collapsed .playerActions {
+        order: initial;
+    }
+    .player.collapsed .playerContent {
+        flex-flow: column nowrap;
+        justify-content: flex-end;
+    }
 }

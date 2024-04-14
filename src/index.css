@@ -755,17 +755,17 @@ select:focus {
     }
 }
 
-button:focus {
+/* button:focus {
     box-shadow: 0 0 0 2px #0096bfab;
     box-shadow: 0 0 0 2px var(--focus);
-}
+} */
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     button:focus {
         box-shadow: 0 0 0 2px #0096bfab;
         box-shadow: 0 0 0 2px var(--focus);
     }
-}
+} */
 
 textarea:focus {
     box-shadow: 0 0 0 2px #0096bfab;
