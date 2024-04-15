@@ -140,6 +140,7 @@ input[type='range'].seekBar {
     position: relative;
     width: 2.5rem;
     height: 2.5rem;
+    z-index: 1;
 }
 input[type='range'].volumeRange {
     background: #171616;

@@ -6,10 +6,11 @@
 .channelResults {
     display: flex;
     flex-flow: column nowrap;
-    gap: 0.5rem;
+    gap: 1rem;
     padding: 0 1rem;
 }
 .info {
+    position: relative;
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-start;
@@ -53,4 +54,24 @@
 .error svg {
     width: 5rem;
     height: 5rem;
+}
+.switchFavorite {
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    border-radius: 50%;
+    bottom: 1.2rem;
+    left: 1.2rem;
+    background: #00000080;
+    color: white;
+    padding: 0.6rem;
+}
+.switchFavorite:hover, .switchFavorite.favoriteActive {
+    color: #c90000;
+}
+.switchFavorite svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
 }

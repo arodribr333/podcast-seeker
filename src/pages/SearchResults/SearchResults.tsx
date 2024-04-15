@@ -1,7 +1,7 @@
 import { useContext } from 'react';
+import { Podcast } from '../../components/Podcast/Podcast';
 import { PlayerContext } from '../../context/PlayerContext';
 import type { PodcastType } from '../../types/types';
-import { Podcast } from '../Podcast/Podcast';
 import styles from './SearchResults.module.css';
 
 export const SearchResults = () => {

@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
+import { IconError, IconFavorite, IconNoFavorite } from '../../components/Icons/Icons';
+import { PodcastTrack } from '../../components/PodcastTrack/PodcastTrack';
 import { PlayerContext } from '../../context/PlayerContext';
 import { useChannels } from '../../hooks/useChannels';
 import type { ReturnedChannel } from '../../types/types';
-import { IconError } from '../Icons/Icons';
-import { PodcastTrack } from '../PodcastTrack/PodcastTrack';
 import styles from './ChannelResults.module.css';
 export const ChannelResults = () => {
-    const { channelUsed } = useContext( PlayerContext );
+    const { channelUsed, favorites, handleUpdateFavorites, isInFavorites } = useContext( PlayerContext );
     const { feedUrl, trackId } = channelUsed;
     const { getChannel } = useChannels();
+    const [ favorite, setFavorite ] = useState<boolean>(false);
     const [ channel, setChannel ] = useState<Error | ReturnedChannel>();
     useEffect( () => {
         try {
@@ -17,12 +18,24 @@ export const ChannelResults = () => {
             console.log( error );
         }
     }, [] );
+    useEffect( () => {
+        isInFavorites( channel ) ? setFavorite( true ) : setFavorite( false );
+    }, [channel, favorites])
+    const handleFavoriteSwitch = () => {
+        handleUpdateFavorites( channel );
+    };
     return (
         <>
             {channel && !( channel instanceof Error ) && (
                 <>
                     <div className={styles.channelPage}>
                         <div className={styles.info}>
+                            <button
+                                className={`${styles.switchFavorite} ${favorite && styles.favoriteActive}`}
+                                onClick={handleFavoriteSwitch}
+                                type='button'>
+                                { favorite ? <IconFavorite /> : <IconNoFavorite />}
+                            </button>
                             <figure className={styles.infoFigure}>
                                 <img
                                     className={styles.infoImg}
@@ -57,7 +70,7 @@ export const ChannelResults = () => {
             )}
             {channel && channel instanceof Error && (
                 <h3 className={styles.error}>
-                    <IconError /> Lo sentimos, no se ha podido cargar el canal
+                    <IconError /> Sorry about that! The channel has not been loaded
                 </h3>
             )}
         </>

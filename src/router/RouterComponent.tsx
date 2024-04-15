@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import { ChannelResults } from '../components/ChannelResults/ChannelResults';
-import { SearchResults } from '../components/SearchResults/SearchResults';
+import { ChannelResults } from '../pages/ChannelResults/ChannelResults';
+import { SearchResults } from '../pages/SearchResults/SearchResults';
 
 interface RouterComponentProps {
     firstSearch: boolean;
