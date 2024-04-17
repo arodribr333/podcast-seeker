@@ -23,6 +23,7 @@
 }
 .infoFigure {
     max-width: 10rem;
+    min-width: 7rem;
     margin: 0;
     display: flex;
 }
