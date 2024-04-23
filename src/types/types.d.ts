@@ -81,6 +81,7 @@ export interface ReturnedChannel {
 	items: MappedXmlChannelItem[];
 	language: string;
 	type: string;
+	feedUrl: string;
 }
 
 export interface PodcastType {

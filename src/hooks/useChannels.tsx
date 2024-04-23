@@ -48,7 +48,7 @@ export const useChannels = () => {
 		return fetch(feedUrl)
 			.then((response) => response.text())
 			.then((inputData) => {
-				return handleChannel({ inputData, trackId });
+				return handleChannel({ inputData, trackId, feedUrl });
 			})
 			.catch((error) => {
 				console.log(`Error fetching ${error}`);

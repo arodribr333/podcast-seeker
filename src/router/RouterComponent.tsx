@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { ChannelResults } from '../pages/ChannelResults/ChannelResults';
+import { Favorites } from '../pages/Favorites/Favorites';
 import { SearchResults } from '../pages/SearchResults/SearchResults';
 
 interface RouterComponentProps {
@@ -18,6 +19,10 @@ export const RouterComponent = ( { firstSearch }: RouterComponentProps ) => {
             <Route
                 path='/channel'
                 element={<ChannelResults />}
+            />
+            <Route
+                path='/favorites'
+                element={<Favorites />}
             />
         </Routes>
     );

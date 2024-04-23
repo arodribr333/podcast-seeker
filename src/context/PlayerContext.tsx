@@ -1,11 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import type {
-    PlayerContextState,
-    PlayerContextType,
-    PlayerProviderProps,
-    ProviderChannel,
-    ProviderPlayer,
-    ProviderSearch,
+	PlayerContextState,
+	PlayerContextType,
+	PlayerProviderProps,
+	ProviderChannel,
+	ProviderPlayer,
+	ProviderSearch,
 } from "../types/context.types";
 import type { ReturnedChannel } from "../types/types";
 const initialState: PlayerContextState = {
@@ -48,6 +49,17 @@ export const PlayerProvider = ({ children }: PlayerProviderProps) => {
 	const [volume, setVolume] = useState<number>(1);
 	const [currentTime, setCurrentTime] = useState<number>(0);
 	const [favorites, updateFavorites] = useState<ReturnedChannel[]>([]);
+	const [savedFavorites, setSavedFavorites] = useLocalStorage< ReturnedChannel[] | null>(
+		"favorites",
+		null,
+	);
+	
+	useEffect( () => {
+		if ( savedFavorites ) {
+			updateFavorites( savedFavorites );
+			return;
+		}
+	}, []);
 	const handlePlayer = (player: ProviderPlayer) => {
 		setPlayer(player);
 	};
@@ -83,6 +95,7 @@ export const PlayerProvider = ({ children }: PlayerProviderProps) => {
             return;
         }
 		updateFavorites([...favorites, channel]);
+		setSavedFavorites([...favorites, channel]);
 	};
 	return (
 		<PlayerContext.Provider

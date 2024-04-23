@@ -9,9 +9,10 @@ import type {
 interface handleChannelProps {
     inputData: string;
     trackId: number;
+    feedUrl: string;
 };
 export const useXMLParser = () => {
-    const handleChannel = useCallback( ( { inputData, trackId }: handleChannelProps ): ReturnedChannel => {
+    const handleChannel = useCallback( ( { inputData, trackId, feedUrl }: handleChannelProps ): ReturnedChannel => {
         const x2js = new X2JS();
         const xmlDoc: XmlDoc = x2js.xml2js( inputData );
         const channel: XMLChannel = xmlDoc.rss?.channel;
@@ -73,7 +74,8 @@ export const useXMLParser = () => {
             generator: channel.generator,
             items: XmlMappedItems,
             language: channel.language,
-            type: channel.type
+            type: channel.type,
+            feedUrl
         };
     }, [] );
 
