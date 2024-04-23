@@ -96,7 +96,6 @@ export const usePodcastPlayer = () => {
     const handleTimeUpdate = (
         event: React.SyntheticEvent<HTMLAudioElement>,
     ) => {
-        console.log( event );
         if ( !audioRef.current ) return;
 
         const audio = audioRef.current;

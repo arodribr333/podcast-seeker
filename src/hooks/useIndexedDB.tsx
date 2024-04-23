@@ -27,7 +27,6 @@ function useIndexedDB<T> ( config: DBConfig<T> ) {
         };
 
         request.onupgradeneeded = ( event ) => {
-            console.log( event );
             const db = request.result;
             const store = db.createObjectStore( config.storeName, { keyPath: config.keyPath } );
 

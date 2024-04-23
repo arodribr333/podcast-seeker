@@ -9,7 +9,7 @@ interface FavoriteProps {
     favorite: ReturnedChannel;
 }
 export const Favorite = ( { favorite }: FavoriteProps ) => {
-    const { handleChannelUsedChange } = useContext( PlayerContext );
+    const { channelUsed, handleChannelUsedChange } = useContext( PlayerContext );
     const navigate = useNavigate();
 	const [data, setData] = useLocalStorage<Error | ReturnedChannel | null>(
 		'channel',
@@ -23,7 +23,6 @@ export const Favorite = ( { favorite }: FavoriteProps ) => {
         } );
         setData( favorite );
         setTimeout( () => {
-            console.log( data );
             navigate( '/channel' );
         }, 300 );
     };

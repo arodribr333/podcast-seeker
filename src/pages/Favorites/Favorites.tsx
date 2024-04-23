@@ -3,7 +3,7 @@ import { Favorite } from '../../components/Podcast/Favorite';
 import { PlayerContext } from '../../context/PlayerContext';
 import styles from './Favorites.module.css';
 export const Favorites = () => {
-	const { favorites } = useContext(PlayerContext);
+	const { favorites, handleChannelUsedChange } = useContext(PlayerContext);
 	return (
 		<div className={styles.favorites}>
 			{(favorites.length > 0) ? (
