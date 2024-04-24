@@ -1,14 +1,11 @@
-import { useNavigate } from 'react-router-dom';
 import { IconError, IconFavorite, IconNoFavorite } from '../../components/Icons/Icons';
 import { PodcastTrack } from '../../components/PodcastTrack/PodcastTrack';
 import { useChannels } from '../../hooks/useChannels';
 import styles from './ChannelResults.module.css';
 export const ChannelResults = () => {
     const { channel, favorite, imageSrc, handleFavoriteSwitch, handleImageError } = useChannels();
-    const navigate = useNavigate();
     return (
         <>
-            <button onClick={()=>navigate('/favorites')}>favoritos</button>
             {channel && !( channel instanceof Error ) && (
                 <div className={styles.channelPage}>
                     <div className={styles.info}>

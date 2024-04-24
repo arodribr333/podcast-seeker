@@ -13,7 +13,7 @@ export const HeaderSeeker = ({
     inputChange,
 }: HeaderSeekerProps) => {
     return (
-        <header>
+        <div>
             <h1>Buscador de podcast</h1>
             <form
                 className={styles.form}
@@ -31,6 +31,6 @@ export const HeaderSeeker = ({
                 </div>
                 {error && <p className={styles.error}>{error}</p>}
             </form>
-        </header>
+        </div>
     );
 };

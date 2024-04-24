@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import styles from './App.module.css';
 import { HeaderSeeker } from './components/HeaderSeeker/HeaderSeeker';
+import { MenuBar } from './components/MenuBar/MenuBar';
 import { PodcastPlayer } from './components/PodcastPlayer/PodcastPlayer';
 import { PlayerContext } from './context/PlayerContext';
 import { useSearch } from './hooks/useSearch';
@@ -16,6 +17,7 @@ function App () {
     } = useSearch();
     return (
         <>
+            <MenuBar />
             {url !== '' && <PodcastPlayer />}
             <div className={styles.page}>
                 <HeaderSeeker

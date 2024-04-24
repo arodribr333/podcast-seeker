@@ -46,9 +46,14 @@ audio {
 
 input[type='range'].rangeBar {
     margin: 0;
+    /* cursor: grab; */
+}
+input[type='range'].rangeBar:hover {
+    cursor: grab;
 }
 input[type='range'].rangeBar:active {
     transform: none;
+    cursor: grabbing;
 }
 input[type='range'].rangeBar:focus {
     box-shadow: none;
