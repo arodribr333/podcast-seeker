@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PlayerContext } from '../../context/PlayerContext';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import type { ReturnedChannel } from "../../types/types";
-import { IconView } from "../Icons/Icons";
-import styles from "./Podcast.module.css";
+import type { ReturnedChannel } from '../../types/types';
+import { IconView } from '../Icons/Icons';
+import styles from './Podcast.module.css';
 interface FavoriteProps {
     favorite: ReturnedChannel;
 }
@@ -40,7 +40,7 @@ export const Favorite = ( { favorite }: FavoriteProps ) => {
             </div>
             <button
                 className={styles.podcastButton}
-                type="button"
+                type='button'
                 title={`Ver ${ title }`}
                 onClick={handleViewChannel}>
                 <IconView />

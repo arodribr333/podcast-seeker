@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { PlayerContext } from "../context/PlayerContext";
-import type { ReturnedChannel } from "../types/types";
+import { useContext, useEffect, useState } from 'react';
+import { PlayerContext } from '../context/PlayerContext';
+import type { ReturnedChannel } from '../types/types';
 import { useImageUrl } from './useImageUrl';
-import { useLocalStorage } from "./useLocalStorage";
-import { useXMLParser } from "./useXMLParses";
+import { useLocalStorage } from './useLocalStorage';
+import { useXMLParser } from './useXMLParses';
 interface getChannelProps {
 	feedUrl: string;
 	trackId: number;
@@ -17,7 +17,7 @@ export const useChannels = () => {
 	const [channel, setChannel] = useState<Error | ReturnedChannel>();
 	const { imageSrc, handleSetImageSrc, handleImageError }= useImageUrl();
 	const [data, setData] = useLocalStorage<Error | ReturnedChannel | null>(
-		"channel",
+		'channel',
 		null,
 	);
 	useEffect(() => {

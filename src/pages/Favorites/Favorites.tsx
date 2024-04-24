@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 import { Favorite } from '../../components/Podcast/Favorite';
 import { PlayerContext } from '../../context/PlayerContext';
 import styles from './Favorites.module.css';

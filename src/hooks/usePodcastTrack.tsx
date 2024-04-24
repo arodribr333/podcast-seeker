@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { PlayerContext } from "../context/PlayerContext";
-import type { MappedXmlChannelItem } from "../types/types";
+import { useContext, useEffect, useState } from 'react';
+import { PlayerContext } from '../context/PlayerContext';
+import type { MappedXmlChannelItem } from '../types/types';
 
 export interface PodcastTrackProps {
 	item: MappedXmlChannelItem;

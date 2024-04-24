@@ -1,34 +1,34 @@
-import { useEffect, useState } from "react";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useEffect, useState } from 'react';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import type {
-    PlayerContextState,
-    ProviderChannel,
-    ProviderPlayer,
-    ProviderSearch,
-} from "../../types/context.types";
-import type { ReturnedChannel } from "../../types/types";
+	PlayerContextState,
+	ProviderChannel,
+	ProviderPlayer,
+	ProviderSearch,
+} from '../../types/context.types';
+import type { ReturnedChannel } from '../../types/types';
 
 const initialState: PlayerContextState = {
-	url: "",
+	url: '',
 	isPlaying: false,
 	volume: 1,
 	currentTime: 0,
 	searchUsed: {
 		hasResults: false,
-		term: "",
+		term: '',
 		podcasts: {
 			resultCount: 0,
 			results: [],
 		},
 	},
 	channelUsed: {
-		feedUrl: "",
+		feedUrl: '',
 		trackId: 0,
 	},
 	player: {
-		title: "",
-		channel: "",
-		image: "",
+		title: '',
+		channel: '',
+		image: '',
 	},
 	favorites: [],
 };
@@ -40,14 +40,14 @@ export const usePodcastProvider = () => {
 		initialState.channelUsed,
 	);
 	const [player, setPlayer] = useState<ProviderPlayer>(initialState.player);
-	const [url, setUrl] = useState<string>("");
+	const [url, setUrl] = useState<string>('');
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const [volume, setVolume] = useState<number>(1);
 	const [currentTime, setCurrentTime] = useState<number>(0);
 	const [favorites, updateFavorites] = useState<ReturnedChannel[]>([]);
 	const [savedFavorites, setSavedFavorites] = useLocalStorage<
 		ReturnedChannel[] | null
-	>("favorites", null);
+	>('favorites', null);
 
 	useEffect(() => {
 		if (savedFavorites) {

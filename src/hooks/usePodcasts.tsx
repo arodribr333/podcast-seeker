@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import type { PodcastsResponse } from '../types/types.d';
 const initialPodcastsResponse: PodcastsResponse = {
     resultCount: 0,

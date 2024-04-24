@@ -38,7 +38,7 @@ export const PodcastPlayer = () => {
         >
             <button
                 className={styles.buttonCollapseStatus}
-                type="button"
+                type='button'
                 title={collapsed ? 'Uncollapse' : 'Collapse'}
                 onClick={handleCollapsePlayer}
             >
@@ -61,11 +61,11 @@ export const PodcastPlayer = () => {
                 />
                 <div className={styles.playerActions}>
                     <button
-                        title="Return 10 seconds"
+                        title='Return 10 seconds'
                         className={styles.playerButton}
                         onClick={() => handleModifiedTime( -10 )}
                         disabled={!isPlaying}
-                        type="button"
+                        type='button'
                     >
                         <IconTimeBackward />
                     </button>
@@ -73,16 +73,16 @@ export const PodcastPlayer = () => {
                         title={`${ isPlaying ? 'Pause' : 'Play' }`}
                         className={styles.playerButton}
                         onClick={handleRunning}
-                        type="button"
+                        type='button'
                     >
                         {isPlaying ? <IconPause /> : <IconPlay />}
                     </button>
                     <button
-                        title="Advance 10 seconds"
+                        title='Advance 10 seconds'
                         className={styles.playerButton}
                         onClick={() => handleModifiedTime( 10 )}
                         disabled={!isPlaying}
-                        type="button"
+                        type='button'
                     >
                         <IconTimeForward />
                     </button>
@@ -90,24 +90,24 @@ export const PodcastPlayer = () => {
                         className={styles.playerButton}
                         title={`${ mute ? 'Unmute' : 'Mute' }`}
                         onClick={handleSwitchMute}
-                        type="button"
+                        type='button'
                     >
                         {mute ? <IconVolumeOn /> : <IconVolumeOff />}
                     </button>
                     <div className={styles.volumeControl}>
                         <button
                             className={`${ styles.playerButton } ${ styles.volumeHandler }`}
-                            title="Display volume regulator"
-                            type="button"
+                            title='Display volume regulator'
+                            type='button'
                         >
                             <IconVolume />
                         </button>
                         <input
                             className={`${ styles.rangeBar } ${ styles.volumeRange }`}
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.01"
+                            type='range'
+                            min='0'
+                            max='1'
+                            step='0.01'
                             value={volume}
                             onChange={( event ) =>
                                 onVolumeChange( event.target.valueAsNumber )
@@ -118,8 +118,8 @@ export const PodcastPlayer = () => {
                 <div className={styles.timeHandler}>
                     <input
                         className={`${ styles.rangeBar } ${ styles.seekBar }`}
-                        type="range"
-                        min="0"
+                        type='range'
+                        min='0'
                         max={audioRef.current?.duration || 0}
                         value={currentTime}
                         onChange={( event ) =>

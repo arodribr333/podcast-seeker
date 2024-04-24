@@ -37,7 +37,7 @@ export const useSearch = () => {
     };
     const handleSearchTerm = useCallback( () => {
         if ( search === '' ) {
-            setError( "You can't do an empty search" );
+            setError( 'You can not do an empty search' );
             return;
         }
         if ( search.length < 3 ) {

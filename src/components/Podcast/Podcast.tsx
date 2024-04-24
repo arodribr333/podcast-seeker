@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PlayerContext } from '../../context/PlayerContext';
-import type { PodcastType } from "../../types/types";
-import { IconView } from "../Icons/Icons";
-import styles from "./Podcast.module.css";
+import type { PodcastType } from '../../types/types';
+import { IconView } from '../Icons/Icons';
+import styles from './Podcast.module.css';
 const GENRE = 'Podcasts';
 interface PodcastProps {
     podcast: PodcastType;
@@ -45,7 +45,7 @@ export const Podcast = ( { podcast }: PodcastProps ) => {
             </div>
             <button
                 className={styles.podcastButton}
-                type="button"
+                type='button'
                 title={`Ver ${ collectionName }`}
                 onClick={handleViewPodcast}>
                 <IconView />

@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useImageUrl } from '../../hooks/useImageUrl';
 import {
-    usePodcastTrack,
-    type PodcastTrackProps,
-} from "../../hooks/usePodcastTrack";
-import { IconCalendar, IconPause, IconPlay, IconTime } from "../Icons/Icons";
-import styles from "./PodcastTrack.module.css";
+	usePodcastTrack,
+	type PodcastTrackProps,
+} from '../../hooks/usePodcastTrack';
+import { IconCalendar, IconPause, IconPlay, IconTime } from '../Icons/Icons';
+import styles from './PodcastTrack.module.css';
 export const PodcastTrack = ({ item }: PodcastTrackProps) => {
 	const { trackRunning, handleAddTrack } =
 		usePodcastTrack({ item });
@@ -16,7 +16,7 @@ export const PodcastTrack = ({ item }: PodcastTrackProps) => {
 	}, [item]);
 
 	return (
-		<article className={`${styles.track} ${trackRunning ? styles.active : ""}`}>
+		<article className={`${styles.track} ${trackRunning ? styles.active : ''}`}>
 			<div className={styles.trackItem}>
 				<img
 					className={styles.trackImg}
@@ -30,7 +30,7 @@ export const PodcastTrack = ({ item }: PodcastTrackProps) => {
 						<p className={styles.date}>
 							<IconCalendar /> {item.date}
 						</p>
-						{item.duration.includes(":") && (
+						{item.duration.includes(':') && (
 							<p className={styles.trackDuration}>
 								<IconTime /> {item.duration}
 							</p>
@@ -47,10 +47,10 @@ export const PodcastTrack = ({ item }: PodcastTrackProps) => {
 			</div>
 			<button
 				className={`${styles.actionButton} ${
-					trackRunning ? styles.active : ""
+					trackRunning ? styles.active : ''
 				}`}
 				title={item.title}
-				type="button"
+				type='button'
 				onClick={handleAddTrack}
 			>
 				{trackRunning ? <IconPause /> : <IconPlay />}

@@ -1,11 +1,11 @@
-import { useCallback } from "react";
-import X2JS from "x2js";
+import { useCallback } from 'react';
+import X2JS from 'x2js';
 import type {
     ReturnedChannel,
     XMLChannel,
     XmlChannelItem,
     XmlDoc
-} from "../types/types.d";
+} from '../types/types.d';
 interface handleChannelProps {
     inputData: string;
     trackId: number;
@@ -27,7 +27,7 @@ export const useXMLParser = () => {
         };
         const getItemId = ( date: string ): number => {
             const pub = new Date( date ).getTime();
-            const result = ( Math.floor( trackId * ( trackId * Math.random() ) ) ) + pub;
+            const result = ( Math.floor( trackId * ( trackId * 5 ) ) ) + pub;
             return result;
         };
         const processXmlItem = ( item: XmlChannelItem[] | XmlChannelItem, channelTitle: string ) => {

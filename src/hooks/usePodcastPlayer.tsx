@@ -1,5 +1,5 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import { PlayerContext } from "../context/PlayerContext";
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { PlayerContext } from '../context/PlayerContext';
 
 export const usePodcastPlayer = () => {
     const {
@@ -14,9 +14,9 @@ export const usePodcastPlayer = () => {
     } = useContext( PlayerContext );
     const audioRef = useRef<HTMLAudioElement | null>( null );
     const [ duration, setDuration ] = useState( 0 );
-    const [ totalTime, setTotalTime ] = useState<string>( "" );
+    const [ totalTime, setTotalTime ] = useState<string>( '' );
     const [ mute, setMute ] = useState<boolean>( false );
-    const [ currentShown, setCurrentShown ] = useState<string>( "" );
+    const [ currentShown, setCurrentShown ] = useState<string>( '' );
     const [ collapsed, setCollapsed ] = useState<boolean>( false );
 
     useEffect( () => {
@@ -38,7 +38,7 @@ export const usePodcastPlayer = () => {
 
         return () => {
             audio.pause();
-            audio.src = "";
+            audio.src = '';
         };
     }, [ url ] );
 
@@ -80,14 +80,14 @@ export const usePodcastPlayer = () => {
         const hours = Math.floor( seconds / 3600 );
         const minutes = Math.floor( ( seconds % 3600 ) / 60 );
         const secondsLeft = Math.floor( ( seconds % 3600 ) % 60 );
-        return `${ hours.toString().padStart( 2, "0" ) }:${ minutes
+        return `${ hours.toString().padStart( 2, '0' ) }:${ minutes
             .toString()
-            .padStart( 2, "0" ) }:${ secondsLeft.toString().padStart( 2, "0" ) }`;
+            .padStart( 2, '0' ) }:${ secondsLeft.toString().padStart( 2, '0' ) }`;
     }, [] );
 
     const formatTotalTime = useCallback(
         ( duration: number ) => {
-            if ( !duration ) return "00:00:00";
+            if ( !duration ) return '00:00:00';
             return formatTime( duration );
         },
         [ formatTime ],

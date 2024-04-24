@@ -11,9 +11,9 @@ export const useAudio = ( url: string ) => {
     }, [ playing ] );
 
     useEffect( () => {
-        audio.addEventListener( "ended", () => setPlaying( false ) );
+        audio.addEventListener( 'ended', () => setPlaying( false ) );
         return () => {
-            audio.removeEventListener( "ended", () => setPlaying( false ) );
+            audio.removeEventListener( 'ended', () => setPlaying( false ) );
         };
     }, [] );
 

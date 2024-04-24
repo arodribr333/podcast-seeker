@@ -1,4 +1,4 @@
-import styles from "./HeaderSeeker.module.css";
+import styles from './HeaderSeeker.module.css';
 
 interface HeaderSeekerProps {
     search: string;
@@ -21,13 +21,13 @@ export const HeaderSeeker = ({
             >
                 <div className={styles.formSearch}>
                     <input
-                        type="text"
+                        type='text'
                         value={search}
                         onChange={(e) => inputChange(e)}
-                        name="query"
-                        placeholder="National Geographic, midudev..."
+                        name='query'
+                        placeholder='National Geographic, midudev...'
                     />
-                    <button type="submit">Buscar</button>
+                    <button type='submit'>Buscar</button>
                 </div>
                 {error && <p className={styles.error}>{error}</p>}
             </form>
