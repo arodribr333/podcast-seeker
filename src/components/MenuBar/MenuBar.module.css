@@ -24,6 +24,7 @@
 .menuButton:hover {
     color: #421477;
     background-color: #d4cfd7;
+    box-shadow: inset 0px 0px 10px 3px #5a5a5a;
 }
 .menuButton:active {
     transform: none;
