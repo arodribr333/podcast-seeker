@@ -35,7 +35,7 @@ export interface PlayerContextType {
     isPlaying: boolean;
     volume: number;
     currentTime: number;
-    favorites: ReturnedChannel[];
+    favorites: MappedXmlChannelItem[];
     handleUrlChange: ( url: string ) => void;
     handleSearchUsedChange: ( search: ProviderSearch ) => void;
     handleChannelUsedChange: ( channel: ProviderChannel ) => void;
@@ -44,8 +44,8 @@ export interface PlayerContextType {
     handlePause: () => void;
     handleVolumeChange: ( newVolume: number ) => void;
     handleTimeChange: ( time: number ) => void;
-    handleUpdateFavorites: ( channel: ReturnedChannel ) => void;
-    isInFavorites: ( channel: ReturnedChannel ) => boolean;
+    handleUpdateFavorites: ( item: MappedXmlChannelItem ) => void;
+    isInFavorites: ( item: MappedXmlChannelItem ) => boolean;
 }
 export interface PlayerProviderProps {
     children: JSX.Element;

@@ -1,20 +1,20 @@
-import { IconError, IconFavorite, IconNoFavorite } from '../../components/Icons/Icons';
+import { IconError } from '../../components/Icons/Icons';
 import { PodcastTrack } from '../../components/PodcastTrack/PodcastTrack';
 import { useChannels } from '../../hooks/useChannels';
 import styles from './ChannelResults.module.css';
 export const ChannelResults = () => {
-    const { channel, favorite, imageSrc, handleFavoriteSwitch, handleImageError } = useChannels();
+    const { channel, imageSrc, handleImageError } = useChannels();
     return (
         <>
             {channel && !( channel instanceof Error ) && (
                 <div className={styles.channelPage}>
                     <div className={styles.info}>
-                        <button
+                        {/* <button
                             className={`${styles.switchFavorite} ${favorite && styles.favoriteActive}`}
                             onClick={handleFavoriteSwitch}
                             type='button'>
                             { favorite ? <IconFavorite /> : <IconNoFavorite />}
-                        </button>
+                        </button> */}
                         <figure className={styles.infoFigure}>
                             <img
                                 className={styles.infoImg}

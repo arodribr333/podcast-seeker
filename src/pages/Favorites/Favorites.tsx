@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Favorite } from '../../components/Podcast/Favorite';
+import { PodcastTrack } from '../../components/PodcastTrack/PodcastTrack';
 import { PlayerContext } from '../../context/PlayerContext';
 import styles from './Favorites.module.css';
 export const Favorites = () => {
@@ -7,9 +7,12 @@ export const Favorites = () => {
 	return (
 		<div className={styles.favorites}>
 			{(favorites.length > 0) ? (
-                favorites.map( ( favorite ) => (
-                    <Favorite key={favorite.id} favorite={favorite} />
-                ))
+                favorites.map( ( item ) => (
+					<PodcastTrack
+						key={item.id}
+						item={item}
+					/>
+				))
 			) : (
 				<p>You still have no favorite saved</p>
 			)}

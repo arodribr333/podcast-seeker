@@ -9,11 +9,10 @@ interface getChannelProps {
 	trackId: number;
 }
 export const useChannels = () => {
-	const { channelUsed, favorites, handleUpdateFavorites, isInFavorites } =
-		useContext(PlayerContext);
+	const { channelUsed } = useContext(PlayerContext);
 	const { feedUrl, trackId } = channelUsed;
 	const { handleChannel } = useXMLParser();
-	const [favorite, setFavorite] = useState<boolean>(false);
+	// const [favorite, setFavorite] = useState<boolean>(false);
 	const [channel, setChannel] = useState<Error | ReturnedChannel>();
 	const { imageSrc, handleSetImageSrc, handleImageError }= useImageUrl();
 	const [data, setData] = useLocalStorage<Error | ReturnedChannel | null>(
@@ -34,16 +33,16 @@ export const useChannels = () => {
 			console.log(error);
 		}
 	}, []);
-	useEffect(() => {
-		isInFavorites(channel) ? setFavorite(true) : setFavorite(false);
-	}, [channel, favorites]);
+	// useEffect(() => {
+	// 	isInFavorites(channel) ? setFavorite(true) : setFavorite(false);
+	// }, [channel, favorites]);
 	useEffect( () => {
 		if ( channel instanceof Error || undefined ) return;
 		channel?.image && handleSetImageSrc(channel.image);
 	}, [channel]);
-	const handleFavoriteSwitch = () => {
-		handleUpdateFavorites(channel);
-	};
+	// const handleFavoriteSwitch = () => {
+	// 	handleUpdateFavorites(channel);
+	// };
 	const getChannel = async ({ feedUrl, trackId }: getChannelProps) => {
 		return fetch(feedUrl)
 			.then((response) => response.text())
@@ -58,10 +57,10 @@ export const useChannels = () => {
 	};
 	return {
 		channel,
-		favorite,
+		// favorite,
 		imageSrc,
 		getChannel,
-		handleFavoriteSwitch,
+		// handleFavoriteSwitch,
 		handleImageError
 	};
 };

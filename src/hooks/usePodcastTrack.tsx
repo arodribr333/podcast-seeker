@@ -9,19 +9,29 @@ export const usePodcastTrack = ({ item }: PodcastTrackProps) => {
 	const {
 		url,
 		isPlaying,
+		favorites,
 		handleTimeChange,
 		handleUrlChange,
 		handlePlayer,
 		handlePlay,
 		handlePause,
+		handleUpdateFavorites,
+		isInFavorites
 	} = useContext(PlayerContext);
 
 	const [trackRunning, setTrackRunning] = useState(false);
 
+	const [favorite, setFavorite] = useState<boolean>(false);
 	useEffect(() => {
 		setTrackRunning(isPlaying && url === item.audio);
 	}, [isPlaying, url, item.audio]);
 
+	useEffect(() => {
+		isInFavorites(item) ? setFavorite(true) : setFavorite(false);
+	}, [item, favorites]);
+	const handleFavoriteSwitch = () => {
+		handleUpdateFavorites(item);
+	};
 	const handleAddTrack = () => {
 		const { title, channel, image, audio } = item;
 		handleTimeChange(0);
@@ -31,6 +41,8 @@ export const usePodcastTrack = ({ item }: PodcastTrackProps) => {
 	};
 	return {
 		trackRunning,
-		handleAddTrack		
+		favorite,
+		handleFavoriteSwitch,
+		handleAddTrack
 	};
 };

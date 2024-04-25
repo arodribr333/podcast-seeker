@@ -6,7 +6,7 @@ import type {
 	ProviderPlayer,
 	ProviderSearch,
 } from '../../types/context.types';
-import type { ReturnedChannel } from '../../types/types';
+import type { MappedXmlChannelItem } from '../../types/types';
 
 const initialState: PlayerContextState = {
 	url: '',
@@ -44,9 +44,9 @@ export const usePodcastProvider = () => {
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const [volume, setVolume] = useState<number>(1);
 	const [currentTime, setCurrentTime] = useState<number>(0);
-	const [favorites, updateFavorites] = useState<ReturnedChannel[]>([]);
+	const [favorites, updateFavorites] = useState<MappedXmlChannelItem[]>([]);
 	const [savedFavorites, setSavedFavorites] = useLocalStorage<
-		ReturnedChannel[] | null
+	MappedXmlChannelItem[] | null
 	>('favorites', null);
 
 	useEffect(() => {
@@ -79,20 +79,19 @@ export const usePodcastProvider = () => {
 	const handleTimeChange = (time: number) => {
 		setCurrentTime(time);
 	};
-	const isInFavorites = (channel: ReturnedChannel): boolean => {
-		return favorites.some((fav) => fav.id === channel?.id);
+	const isInFavorites = (item: MappedXmlChannelItem): boolean => {
+		return favorites.some((fav) => fav.id === item?.id);
 	};
-	const handleUpdateFavorites = (channel: ReturnedChannel) => {
-		const isFavorite = isInFavorites(channel);
+	const handleUpdateFavorites = (item: MappedXmlChannelItem) => {
+		const isFavorite = isInFavorites(item);
 		if (isFavorite) {
-			const filtered = favorites.filter((item) => {
-				item.id !== channel.id;
-			});
+			const filtered = favorites.filter((fav) => fav.id !== item.id);
 			updateFavorites([...filtered]);
+			setSavedFavorites([...filtered]);
 			return;
 		}
-		updateFavorites([...favorites, channel]);
-		setSavedFavorites([...favorites, channel]);
+		updateFavorites([...favorites, item]);
+		setSavedFavorites([...favorites, item]);
 	};
 
 	return {

@@ -3,7 +3,7 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     gap: 2rem;
-    background-color: #d5d5d520;
+    background-color: #63637185;
     border-radius: 0.5rem;
     /* overflow: hidden; */
     box-sizing: border-box;
@@ -62,9 +62,19 @@
     width: 1.5rem;
     height: 1.5rem;
 }
+.actions {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 0;
+}
 .actionButton {
     margin: 0;
     border-radius: 0 0.3rem 0.3rem 0;
+    flex-grow: 1;
+    padding: 1rem;
+}
+.favAction {
+    border-radius: 0;
 }
 .actionButton:hover, .actionButton:active, .actionButton:focus {
     transform: none;
@@ -76,9 +86,9 @@
     background: linear-gradient(#421477, #24043c);
     color: #b6b4b6;
 }
-.actionButton:focus {
+/* .actionButton:focus {
     box-shadow: 0 0 0.5rem 0.25rem #8cfe004d;
-}
+} */
 .actionButton svg {
     width: 3rem;
     height: 3rem;
@@ -89,6 +99,10 @@
 .actionButton:hover svg {
     transform: scale(1.2);
     transition: transform 0.2s ease-in;
+}
+.favAction.active {
+    background: var(--button-base);
+    color: #d3c900;
 }
 
 @media screen and (width < 48rem) {
@@ -123,5 +137,11 @@
     .actionButton svg {
         width: 2rem;
         height: 2rem;
+    }
+    .actionButton:not(.favAction) {
+        border-radius: 0 0 0.5rem 0;
+    }
+    .favAction {
+        border-radius: 0 0 0 0.5rem;
     }
 }

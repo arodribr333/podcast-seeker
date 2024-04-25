@@ -4,11 +4,10 @@ import {
 	usePodcastTrack,
 	type PodcastTrackProps,
 } from '../../hooks/usePodcastTrack';
-import { IconCalendar, IconPause, IconPlay, IconTime } from '../Icons/Icons';
+import { IconCalendar, IconFavorite, IconNoFavorite, IconPause, IconPlay, IconTime } from '../Icons/Icons';
 import styles from './PodcastTrack.module.css';
 export const PodcastTrack = ({ item }: PodcastTrackProps) => {
-	const { trackRunning, handleAddTrack } =
-		usePodcastTrack({ item });
+	const { trackRunning, favorite, handleAddTrack, handleFavoriteSwitch } = usePodcastTrack({ item });
     const { handleSetImageSrc, handleImageError }= useImageUrl();
 	useEffect(() => {
 		if (!item || undefined) return;
@@ -45,16 +44,24 @@ export const PodcastTrack = ({ item }: PodcastTrackProps) => {
 					)}
 				</div>
 			</div>
-			<button
-				className={`${styles.actionButton} ${
-					trackRunning ? styles.active : ''
-				}`}
-				title={item.title}
-				type='button'
-				onClick={handleAddTrack}
-			>
-				{trackRunning ? <IconPause /> : <IconPlay />}
-			</button>
+			<div className={styles.actions}>
+				<button
+					className={`${styles.actionButton} ${styles.favAction} ${favorite && styles.active}`}
+					onClick={()=>handleFavoriteSwitch()}
+					type='button'>
+					{ favorite ? <IconFavorite /> : <IconNoFavorite />}
+				</button>
+				<button
+					className={`${styles.actionButton} ${
+						trackRunning ? styles.active : ''
+					}`}
+					title={item.title}
+					type='button'
+					onClick={handleAddTrack}
+				>
+					{trackRunning ? <IconPause /> : <IconPlay />}
+				</button>
+			</div>
 		</article>
 	);
 };

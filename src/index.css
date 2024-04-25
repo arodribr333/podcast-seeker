@@ -2,6 +2,14 @@
     min-height: 100vh;
     box-sizing: border-box;
     padding-bottom: 15rem;
+    
+    background-image: linear-gradient(to bottom, transparent, #202b38), url(/public/pexels-tdcat-347700.jpg);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
 }
 /**
  * Automatic version:
