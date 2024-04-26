@@ -30,8 +30,8 @@
     --border: #dbdbdb;
     --code: #000;
     --animation-duration: 0.1s;
-    --button-base: #d0cfcf;
-    --button-hover: #9b9b9b;
+    --button-base: #0c151c;
+    --button-hover: #24043c;
     --scrollbar-thumb: rgb(170, 170, 170);
     --scrollbar-thumb-hover: var(--button-hover);
     --form-placeholder: #949494;
@@ -213,62 +213,63 @@ h5,
 h6 {
     margin-bottom: 12px;
     margin-top: 24px;
+    color: white;
 }
 
-h1 {
-    color: #000;
-    color: var(--text-bright);
-}
+/* h1 { */
+    /* color: #000; */
+    /* color: var(--text-bright); */
+/* } */
 
-@media (prefers-color-scheme: dark) {
-    h1 {
+/* @media (prefers-color-scheme: dark) { */
+    /* h1 {
         color: #fff;
         color: var(--text-bright);
-    }
-}
+    } */
+/* } */
 
-h2 {
+/* h2 {
     color: #000;
     color: var(--text-bright);
-}
+} */
 
-@media (prefers-color-scheme: dark) {
-    h2 {
+/* @media (prefers-color-scheme: dark) { */
+    /* h2 {
         color: #fff;
         color: var(--text-bright);
-    }
-}
+    } */
+/* } */
 
-h3 {
+/* h3 {
     color: #000;
     color: var(--text-bright);
-}
+} */
 
-@media (prefers-color-scheme: dark) {
-    h3 {
+/* @media (prefers-color-scheme: dark) { */
+    /* h3 {
         color: #fff;
         color: var(--text-bright);
-    }
-}
+    } */
+/* } */
 
-h4 {
+/* h4 {
     color: #000;
     color: var(--text-bright);
-}
+} */
 
-@media (prefers-color-scheme: dark) {
-    h4 {
+/* @media (prefers-color-scheme: dark) { */
+    /* h4 {
         color: #fff;
         color: var(--text-bright);
-    }
-}
-
+    } */
+/* } */
+/* 
 h5 {
     color: #000;
     color: var(--text-bright);
-}
+} */
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     h5 {
         color: #fff;
         color: var(--text-bright);
@@ -278,7 +279,7 @@ h5 {
 h6 {
     color: #000;
     color: var(--text-bright);
-}
+} */
 
 @media (prefers-color-scheme: dark) {
     h6 {
@@ -445,10 +446,10 @@ input {
 }
 
 button {
-    color: #1d1d1d;
-    color: var(--form-text);
-    background-color: #efefef;
-    background-color: var(--background);
+    /* color: #1d1d1d; */
+    /* color: var(--form-text); */
+    /* background-color: #efefef; */
+    /* background-color: var(--background); */
     font-family: inherit;
     font-size: inherit;
     margin-right: 6px;
@@ -459,19 +460,19 @@ button {
     outline: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) { */
     button {
         background-color: #161f27;
         background-color: var(--background);
     }
-}
+/* } */
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) { */
     button {
         color: #fff;
         color: var(--form-text);
     }
-}
+/* } */
 
 textarea {
     color: #1d1d1d;
@@ -532,18 +533,18 @@ select {
 }
 
 button {
-    background-color: #d0cfcf;
-    background-color: var(--button-base);
+    /* background-color: #d0cfcf; */
+    /* background-color: var(--button-base); */
     padding-right: 30px;
     padding-left: 30px;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) { */
     button {
         background-color: #0c151c;
-        background-color: var(--button-base);
+        /* background-color: var(--button-base); */
     }
-}
+/* } */
 
 input[type='submit'] {
     background-color: #d0cfcf;
@@ -587,10 +588,10 @@ input[type='button'] {
     }
 }
 
-button:hover {
+/* button:hover {
     background: #9b9b9b;
     background: var(--button-hover);
-}
+} */
 
 @media (prefers-color-scheme: dark) {
     button:hover {
@@ -1580,4 +1581,31 @@ body > footer {
         color: #00f;
         text-decoration: underline;
     }
+}
+
+.visually-hidden {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px); /* Oculta el elemento visualmente */
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    white-space: nowrap; /* Asegura que no ocupe espacio visible */
+}
+h2 {
+    font-weight: normal;
+    padding: 1rem;
+    background: #00000059;
+    text-shadow: 2px 2px 12px black;
+    margin-top: 0;
+    display: flex;
+    gap: 0.5rem;
+    color: white;
+    align-items: center;
+}
+h2 svg {
+    width: 2rem;
+    height: 2rem;
+}
+* {
+    box-sizing: border-box;
 }

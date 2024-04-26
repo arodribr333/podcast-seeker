@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import { IconSearchList } from '../../components/Icons/Icons';
 import { Podcast } from '../../components/Podcast/Podcast';
 import { PlayerContext } from '../../context/PlayerContext';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -16,7 +17,7 @@ export const SearchResults = () => {
     }, [] );
     return (
         <section className={styles.search}>
-            <h2>Search results:</h2>
+            <h2><IconSearchList /> Search results</h2>
             <div className={styles.searchResults}>
                 {hasResults ? (
                     podcasts.results.map( ( podcast: PodcastType ) => (

@@ -1,3 +1,4 @@
+import { IconSearch } from '../Icons/Icons';
 import styles from './HeaderSeeker.module.css';
 
 interface HeaderSeekerProps {
@@ -13,8 +14,8 @@ export const HeaderSeeker = ({
     inputChange,
 }: HeaderSeekerProps) => {
     return (
-        <div>
-            <h1>Buscador de podcast</h1>
+        <div className={styles.seeker}>
+            <h1 className='visually-hidden'>Buscador de podcast</h1>
             <form
                 className={styles.form}
                 onSubmit={(e) => searchSubmit(e)}
@@ -27,7 +28,10 @@ export const HeaderSeeker = ({
                         name='query'
                         placeholder='National Geographic, midudev...'
                     />
-                    <button type='submit'>Buscar</button>
+                    <button className={styles.searchButton} type='submit'>
+                        <IconSearch />
+                        <span className='visually-hidden'>Buscar</span>
+                    </button>
                 </div>
                 {error && <p className={styles.error}>{error}</p>}
             </form>

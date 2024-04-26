@@ -1,4 +1,4 @@
-import { IconError } from '../../components/Icons/Icons';
+import { IconError, IconPodcast } from '../../components/Icons/Icons';
 import { PodcastTrack } from '../../components/PodcastTrack/PodcastTrack';
 import { useChannels } from '../../hooks/useChannels';
 import styles from './ChannelResults.module.css';
@@ -8,6 +8,7 @@ export const ChannelResults = () => {
         <>
             {channel && !( channel instanceof Error ) && (
                 <div className={styles.channelPage}>
+                    <h2><IconPodcast />Channel</h2>
                     <div className={styles.info}>
                         {/* <button
                             className={`${styles.switchFavorite} ${favorite && styles.favoriteActive}`}

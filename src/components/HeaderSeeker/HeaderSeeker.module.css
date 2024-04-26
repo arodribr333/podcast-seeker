@@ -16,6 +16,38 @@
     gap: 0.5rem;
 }
 .error {
-    color: red;
+    color: #e400ff;
     font-size: 0.825rem;
+    position: absolute;
+    top: 100%;
+    background: #00000085;
+    padding: 1rem;
+    font-weight: bold;
+    left: 0;
+    max-width: 69%;
+    width: 100%;
+    border-bottom: 2px solid #e400ff;
+}
+.seeker {
+    position: relative;
+}
+.searchButton {
+    color: white;
+    padding: 0;
+    display: flex;
+    background: none;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    border-radius: 0.5rem;    
+}
+.searchButton:hover {
+    background: none;
+    color: #6916c8;
+    background-color: #d4cfd7;
+    box-shadow: inset 0px 0px 10px 3px #5a5a5a;
+}
+.searchButton svg {
+    width: 2rem;
+    height: 2rem;
 }

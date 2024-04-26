@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import styles from './App.module.css';
-import { HeaderSeeker } from './components/HeaderSeeker/HeaderSeeker';
 import { MenuBar } from './components/MenuBar/MenuBar';
 import { PodcastPlayer } from './components/PodcastPlayer/PodcastPlayer';
 import { PlayerContext } from './context/PlayerContext';
@@ -20,12 +19,12 @@ function App () {
             <MenuBar />
             {url !== '' && <PodcastPlayer />}
             <div className={styles.page}>
-                <HeaderSeeker
+                {/* <HeaderSeeker
                     search={search}
                     error={error}
                     searchSubmit={( e ) => handleSearchSubmit( e )}
                     inputChange={( e ) => handleInputChange( e )}
-                />
+                /> */}
                 <RouterComponent firstSearch={firstSearch} />
             </div>
         </>
