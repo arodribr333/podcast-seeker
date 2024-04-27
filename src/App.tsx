@@ -19,13 +19,13 @@ function App () {
         <>
             <MenuBar />
             {url !== '' && <PodcastPlayer />}
+            <HeaderSeeker
+                search={search}
+                error={error}
+                searchSubmit={( e ) => handleSearchSubmit( e )}
+                inputChange={( e ) => handleInputChange( e )}
+            />
             <div className={styles.page}>
-                <HeaderSeeker
-                    search={search}
-                    error={error}
-                    searchSubmit={( e ) => handleSearchSubmit( e )}
-                    inputChange={( e ) => handleInputChange( e )}
-                />
                 <RouterComponent firstSearch={firstSearch} />
             </div>
         </>

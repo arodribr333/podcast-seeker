@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
-import { PlayerContext } from '../context/PlayerContext';
-import type { ReturnedChannel } from '../types/types';
-import { useImageUrl } from './useImageUrl';
-import { useLocalStorage } from './useLocalStorage';
-import { useXMLParser } from './useXMLParses';
+import { useContext, useEffect, useState } from "react";
+import { PlayerContext } from "../context/PlayerContext";
+import type { ReturnedChannel } from "../types/types";
+import { useImageUrl } from "./useImageUrl";
+import { useLocalStorage } from "./useLocalStorage";
+import { useXMLParser } from "./useXMLParses";
 interface getChannelProps {
 	feedUrl: string;
 	trackId: number;
@@ -14,9 +14,13 @@ export const useChannels = () => {
 	const { handleChannel } = useXMLParser();
 	// const [favorite, setFavorite] = useState<boolean>(false);
 	const [channel, setChannel] = useState<Error | ReturnedChannel>();
-	const { imageSrc, handleSetImageSrc, handleImageError }= useImageUrl();
+	const channelImg =
+		!(channel instanceof Error || undefined) && channel?.image
+			? channel.image
+			: "";
+	const { imageSrc, handleImageError } = useImageUrl(channelImg);
 	const [data, setData] = useLocalStorage<Error | ReturnedChannel | null>(
-		'channel',
+		"channel",
 		null,
 	);
 	useEffect(() => {
@@ -36,10 +40,10 @@ export const useChannels = () => {
 	// useEffect(() => {
 	// 	isInFavorites(channel) ? setFavorite(true) : setFavorite(false);
 	// }, [channel, favorites]);
-	useEffect( () => {
-		if ( channel instanceof Error || undefined ) return;
-		channel?.image && handleSetImageSrc(channel.image);
-	}, [channel]);
+	// useEffect( () => {
+	// 	if ( channel instanceof Error || undefined ) return;
+	// 	channel?.image && handleSetImageSrc(channel.image);
+	// }, [channel]);
 	// const handleFavoriteSwitch = () => {
 	// 	handleUpdateFavorites(channel);
 	// };
@@ -61,6 +65,6 @@ export const useChannels = () => {
 		imageSrc,
 		getChannel,
 		// handleFavoriteSwitch,
-		handleImageError
+		handleImageError,
 	};
 };

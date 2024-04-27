@@ -30,6 +30,9 @@
 }
 .seeker {
     position: relative;
+    background: #00000059;
+    padding: 1rem 2rem;
+    width: 100%;
 }
 .searchButton {
     color: white;

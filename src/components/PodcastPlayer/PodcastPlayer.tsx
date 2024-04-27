@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { PlayerContext } from '../../context/PlayerContext';
 import { usePodcastPlayer } from '../../hooks/usePodcastPlayer';
 import {
     IconCollapsePlayer,
@@ -14,15 +12,14 @@ import {
 } from '../Icons/Icons';
 import styles from './PodcastPlayer.module.css';
 export const PodcastPlayer = () => {
-    const { isPlaying, volume, currentTime, player } =
-        useContext( PlayerContext );
-    const { title, image, channel } = player;
     const {
+        isPlaying, volume, currentTime, player,
         audioRef,
         collapsed,
         mute,
         currentShown,
         totalTime,
+        imageSrc, 
         handleCollapsePlayer,
         handleModifiedTime,
         handleTimeUpdate,
@@ -30,7 +27,9 @@ export const PodcastPlayer = () => {
         handleSwitchMute,
         onVolumeChange,
         onTimeChange,
+        handleImageError
     } = usePodcastPlayer();
+    const { title, channel } = player;
 
     return (
         <div
@@ -46,8 +45,9 @@ export const PodcastPlayer = () => {
             </button>
             <figure className={styles.playerFigure}>
                 <img
-                    src={image}
+                    src={imageSrc}
                     alt={title}
+                    onError={handleImageError}
                 />
             </figure>
             <div className={styles.playerContent}>

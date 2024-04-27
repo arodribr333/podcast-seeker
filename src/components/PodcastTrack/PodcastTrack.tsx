@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { useImageUrl } from '../../hooks/useImageUrl';
 import {
 	usePodcastTrack,
 	type PodcastTrackProps,
@@ -7,19 +5,13 @@ import {
 import { IconCalendar, IconFavorite, IconNoFavorite, IconPause, IconPlay, IconTime } from '../Icons/Icons';
 import styles from './PodcastTrack.module.css';
 export const PodcastTrack = ({ item }: PodcastTrackProps) => {
-	const { trackRunning, favorite, handleAddTrack, handleFavoriteSwitch } = usePodcastTrack({ item });
-    const { handleSetImageSrc, handleImageError }= useImageUrl();
-	useEffect(() => {
-		if (!item || undefined) return;
-		item?.image && handleSetImageSrc(item.image);
-	}, [item]);
-
+	const { imageSrc, trackRunning, favorite, handleAddTrack, handleFavoriteSwitch, handleImageError } = usePodcastTrack({ item });
 	return (
 		<article className={`${styles.track} ${trackRunning ? styles.active : ''}`}>
 			<div className={styles.trackItem}>
 				<img
 					className={styles.trackImg}
-					src={item.image}
+					src={imageSrc}
 					alt={item.title}
 					onError={handleImageError}
 				/>

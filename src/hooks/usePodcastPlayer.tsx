@@ -1,8 +1,10 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { PlayerContext } from '../context/PlayerContext';
+import { useImageUrl } from './useImageUrl';
 
 export const usePodcastPlayer = () => {
     const {
+        player,
         url,
         isPlaying,
         volume,
@@ -18,6 +20,8 @@ export const usePodcastPlayer = () => {
     const [ mute, setMute ] = useState<boolean>( false );
     const [ currentShown, setCurrentShown ] = useState<string>( '' );
     const [ collapsed, setCollapsed ] = useState<boolean>( false );
+    const { image } = player;
+    const { imageSrc, handleImageError } = useImageUrl(image);
 
     useEffect( () => {
         if ( !audioRef.current ) return;
@@ -76,6 +80,11 @@ export const usePodcastPlayer = () => {
         }
     }, [ isPlaying ] );
 
+	// useEffect(() => {
+	// 	if (!image || undefined) return;
+	// 	image && handleSetImageSrc(image);
+    // }, [ image ] );
+    
     const formatTime = useCallback( ( seconds: number ) => {
         const hours = Math.floor( seconds / 3600 );
         const minutes = Math.floor( ( seconds % 3600 ) / 60 );
@@ -153,6 +162,8 @@ export const usePodcastPlayer = () => {
         setCollapsed( !collapsed );
     };
     return {
+        isPlaying, volume, currentTime, player,
+        imageSrc, 
         audioRef,
         duration,
         totalTime,
@@ -166,5 +177,6 @@ export const usePodcastPlayer = () => {
         handleSwitchMute,
         onVolumeChange,
         onTimeChange,
+        handleImageError
     };
 };

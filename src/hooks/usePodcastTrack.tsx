@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { PlayerContext } from '../context/PlayerContext';
 import type { MappedXmlChannelItem } from '../types/types';
+import { useImageUrl } from './useImageUrl';
 
 export interface PodcastTrackProps {
 	item: MappedXmlChannelItem;
@@ -28,7 +29,13 @@ export const usePodcastTrack = ({ item }: PodcastTrackProps) => {
 
 	useEffect(() => {
 		isInFavorites(item) ? setFavorite(true) : setFavorite(false);
-	}, [item, favorites]);
+	}, [ item, favorites ] );
+	
+    const { imageSrc, handleImageError }= useImageUrl(item.image);
+	// useEffect(() => {
+	// 	if (!item || undefined) return;
+	// 	item?.image && handleSetImageSrc(item.image);
+	// }, [item]);
 	const handleFavoriteSwitch = () => {
 		handleUpdateFavorites(item);
 	};
@@ -40,9 +47,11 @@ export const usePodcastTrack = ({ item }: PodcastTrackProps) => {
 		trackRunning ? handlePause() : handlePlay();
 	};
 	return {
+		imageSrc,
 		trackRunning,
 		favorite,
 		handleFavoriteSwitch,
-		handleAddTrack
+		handleAddTrack,
+		handleImageError
 	};
 };

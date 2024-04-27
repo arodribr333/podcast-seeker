@@ -1,18 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styles from '../components/MenuBar/MenuBar.module.css';
 import { PlayerContext } from '../context/PlayerContext';
-import { useSearch } from './useSearch';
 
 export const useMenuBar = () => {
     const { searchUsed, channelUsed } = useContext( PlayerContext );
     const location = useLocation();
-    const {
-        search,
-        error,
-        handleInputChange,
-        handleSearchSubmit,
-    } = useSearch();
+    const navRef = useRef<HTMLElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
     const [ hasChannel, setHasChannel ] = useState<boolean>(false);
     const [ hasSearch, setHasSearch ] = useState<boolean>(false);
     const [ navOpen, setNavOpen ] = useState<boolean>( false );
@@ -23,26 +18,35 @@ export const useMenuBar = () => {
     useEffect( () => {
         if ( searchUsed.hasResults ) setHasSearch( true );
     }, [ searchUsed ] );
+    const handleOpenNavTrigger = () => {
+        setNavOpen( !navOpen );
+    };
     useEffect( () => {
         if ( location.pathname !== currentPath ) setNavOpen( false );
         setCurrentPath( location.pathname );
     }, [ location.pathname ] );
-    const handleOpenNavTrigger = () => {
-        setNavOpen( !navOpen );
-    };
-    const handleActiveLocation = (path:string):string => {
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if ((navRef.current && !navRef.current.contains(event.target as Node)) && (buttonRef.current && !buttonRef.current.contains(event.target as Node))) {
+                setNavOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+    const handleActiveLocation = (path: string): string => {
         if(location.pathname === path) return `${styles.menuButton} ${styles.active}`;
         return `${styles.menuButton}`;
     };
     return {
-        search,
-        error,
+        navRef,
+        buttonRef,
         hasChannel,
         hasSearch,
         navOpen,
         handleOpenNavTrigger,
-        handleActiveLocation,
-        handleInputChange,
-        handleSearchSubmit
+        handleActiveLocation
     }
 }
