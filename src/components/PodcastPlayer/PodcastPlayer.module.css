@@ -170,9 +170,9 @@ input[type='range'].volumeRange {
     transition: all 0.15s ease-in;
 }
 input[type='range'].volumeRange, input[type='range'].volumeRange:active , input[type='range'].volumeRange:focus {
-    transform: rotate(270deg) translate(5rem, -4.74rem);
+    transform: rotate(270deg) translate(3.8rem, -3.75rem);
     border-radius: 5rem;
-    width: 8rem;
+    width: 10rem;
     position: absolute;
     bottom: 0;
 }

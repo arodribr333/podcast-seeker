@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { SeekerConstants, SeekerTexts } from '../constants/constants';
 import { PlayerContext } from "../context/PlayerContext";
 import type { ReturnedChannel } from "../types/types";
 import { useImageUrl } from "./useImageUrl";
@@ -12,15 +13,14 @@ export const useChannels = () => {
 	const { channelUsed } = useContext(PlayerContext);
 	const { feedUrl, trackId } = channelUsed;
 	const { handleChannel } = useXMLParser();
-	// const [favorite, setFavorite] = useState<boolean>(false);
 	const [channel, setChannel] = useState<Error | ReturnedChannel>();
 	const channelImg =
 		!(channel instanceof Error || undefined) && channel?.image
 			? channel.image
-			: "";
+			: '';
 	const { imageSrc, handleImageError } = useImageUrl(channelImg);
 	const [data, setData] = useLocalStorage<Error | ReturnedChannel | null>(
-		"channel",
+		SeekerConstants.CHANNEL_KEY,
 		null,
 	);
 	useEffect(() => {
@@ -37,16 +37,6 @@ export const useChannels = () => {
 			console.log(error);
 		}
 	}, []);
-	// useEffect(() => {
-	// 	isInFavorites(channel) ? setFavorite(true) : setFavorite(false);
-	// }, [channel, favorites]);
-	// useEffect( () => {
-	// 	if ( channel instanceof Error || undefined ) return;
-	// 	channel?.image && handleSetImageSrc(channel.image);
-	// }, [channel]);
-	// const handleFavoriteSwitch = () => {
-	// 	handleUpdateFavorites(channel);
-	// };
 	const getChannel = async ({ feedUrl, trackId }: getChannelProps) => {
 		return fetch(feedUrl)
 			.then((response) => response.text())
@@ -54,17 +44,15 @@ export const useChannels = () => {
 				return handleChannel({ inputData, trackId, feedUrl });
 			})
 			.catch((error) => {
-				console.log(`Error fetching ${error}`);
-				const newError = new Error(`Error fetching ${error}`);
+				console.log(`${SeekerTexts.FETCHING_ERROR} ${error}`);
+				const newError = new Error(`${SeekerTexts.FETCHING_ERROR} ${error}`);
 				return newError;
 			});
 	};
 	return {
 		channel,
-		// favorite,
 		imageSrc,
 		getChannel,
-		// handleFavoriteSwitch,
 		handleImageError,
 	};
 };

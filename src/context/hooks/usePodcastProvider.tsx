@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { SeekerConstants } from '../../constants/constants';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import type {
 	PlayerContextState,
@@ -47,7 +48,7 @@ export const usePodcastProvider = () => {
 	const [favorites, updateFavorites] = useState<MappedXmlChannelItem[]>([]);
 	const [savedFavorites, setSavedFavorites] = useLocalStorage<
 	MappedXmlChannelItem[] | null
-	>('favorites', null);
+	>(SeekerConstants.FAVS_KEY, null);
 
 	useEffect(() => {
 		if (savedFavorites) {

@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SeekerConstants } from '../constants/constants';
 import { PlayerContext } from '../context/PlayerContext';
 import { SearchPodcasts } from '../services/SearchPodcasts';
 
@@ -33,7 +34,7 @@ export const useSearch = () => {
         } );
         firstSearch && setFirstSearch( false );
         if ( window.location.pathname === '/' ) return;
-        navigate( '/' );
+        navigate( SeekerConstants.BASE_LINK );
     };
     const handleSearchTerm = useCallback( () => {
         if ( search === '' ) {

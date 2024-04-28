@@ -1,3 +1,4 @@
+import { SeekerTexts } from '../../constants/constants';
 import { usePodcastPlayer } from '../../hooks/usePodcastPlayer';
 import {
     IconCollapsePlayer,
@@ -38,7 +39,7 @@ export const PodcastPlayer = () => {
             <button
                 className={styles.buttonCollapseStatus}
                 type='button'
-                title={collapsed ? 'Uncollapse' : 'Collapse'}
+                title={collapsed ? SeekerTexts.UNCOLLAPSE : SeekerTexts.COLLAPSE}
                 onClick={handleCollapsePlayer}
             >
                 {collapsed ? <IconUnCollapsePlayer /> : <IconCollapsePlayer />}
@@ -61,7 +62,7 @@ export const PodcastPlayer = () => {
                 />
                 <div className={styles.playerActions}>
                     <button
-                        title='Return 10 seconds'
+                        title={SeekerTexts.RETURN_TIME}
                         className={styles.playerButton}
                         onClick={() => handleModifiedTime( -10 )}
                         disabled={!isPlaying}
@@ -70,7 +71,7 @@ export const PodcastPlayer = () => {
                         <IconTimeBackward />
                     </button>
                     <button
-                        title={`${ isPlaying ? 'Pause' : 'Play' }`}
+                        title={`${ isPlaying ? SeekerTexts.PLAY : SeekerTexts.PAUSE }`}
                         className={styles.playerButton}
                         onClick={handleRunning}
                         type='button'
@@ -78,7 +79,7 @@ export const PodcastPlayer = () => {
                         {isPlaying ? <IconPause /> : <IconPlay />}
                     </button>
                     <button
-                        title='Advance 10 seconds'
+                        title={SeekerTexts.ADVANCE_TIME}
                         className={styles.playerButton}
                         onClick={() => handleModifiedTime( 10 )}
                         disabled={!isPlaying}
@@ -88,7 +89,7 @@ export const PodcastPlayer = () => {
                     </button>
                     <button
                         className={styles.playerButton}
-                        title={`${ mute ? 'Unmute' : 'Mute' }`}
+                        title={`${ mute ? SeekerTexts.UNMUTE : SeekerTexts.MUTE }`}
                         onClick={handleSwitchMute}
                         type='button'
                     >
@@ -97,7 +98,7 @@ export const PodcastPlayer = () => {
                     <div className={styles.volumeControl}>
                         <button
                             className={`${ styles.playerButton } ${ styles.volumeHandler }`}
-                            title='Display volume regulator'
+                            title={SeekerTexts.VOLUME_REGULATOR_DISPLAY}
                             type='button'
                         >
                             <IconVolume />

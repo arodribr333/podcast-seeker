@@ -1,3 +1,4 @@
+import { SeekerTexts } from '../../constants/constants';
 import { IconSearch } from '../Icons/Icons';
 import styles from './HeaderSeeker.module.css';
 
@@ -15,7 +16,7 @@ export const HeaderSeeker = ({
 }: HeaderSeekerProps) => {
     return (
         <div className={styles.seeker}>
-            <h1 className='visually-hidden'>Buscador de podcast</h1>
+            <h1 className='visually-hidden'>{SeekerTexts.PODCAST_SEARCH_ENGINE}</h1>
             <form
                 className={styles.form}
                 onSubmit={(e) => searchSubmit(e)}
@@ -26,11 +27,11 @@ export const HeaderSeeker = ({
                         value={search}
                         onChange={(e) => inputChange(e)}
                         name='query'
-                        placeholder='National Geographic, midudev...'
+                        placeholder={SeekerTexts.INPUT_SEARCH_PLACEHOLDER}
                     />
                     <button className={styles.searchButton} type='submit'>
                         <IconSearch />
-                        <span className='visually-hidden'>Buscar</span>
+                        <span className='visually-hidden'>{SeekerTexts.SEEK}</span>
                     </button>
                 </div>
                 {error && <p className={styles.error}>{error}</p>}

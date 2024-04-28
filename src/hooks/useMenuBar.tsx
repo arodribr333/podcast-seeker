@@ -4,7 +4,7 @@ import styles from '../components/MenuBar/MenuBar.module.css';
 import { PlayerContext } from '../context/PlayerContext';
 
 export const useMenuBar = () => {
-    const { searchUsed, channelUsed } = useContext( PlayerContext );
+    const { isPlaying, searchUsed, channelUsed } = useContext( PlayerContext );
     const location = useLocation();
     const navRef = useRef<HTMLElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
@@ -41,6 +41,7 @@ export const useMenuBar = () => {
         return `${styles.menuButton}`;
     };
     return {
+        isPlaying,
         navRef,
         buttonRef,
         hasChannel,

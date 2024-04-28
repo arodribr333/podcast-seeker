@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SeekerConstants, SeekerTexts } from '../../constants/constants';
 import { PlayerContext } from '../../context/PlayerContext';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import type { ReturnedChannel } from '../../types/types';
@@ -23,7 +24,7 @@ export const Favorite = ( { favorite }: FavoriteProps ) => {
         } );
         setData( favorite );
         setTimeout( () => {
-            navigate( '/channel' );
+            navigate( SeekerConstants.CHANNEL_LINK );
         }, 300 );
     };
     
@@ -41,7 +42,7 @@ export const Favorite = ( { favorite }: FavoriteProps ) => {
             <button
                 className={styles.podcastButton}
                 type='button'
-                title={`Ver ${ title }`}
+                title={`${SeekerTexts.WATCH} ${ title }`}
                 onClick={handleViewChannel}>
                 <IconView />
             </button>

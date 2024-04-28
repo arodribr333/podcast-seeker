@@ -1,5 +1,6 @@
 import { IconError, IconPodcast } from '../../components/Icons/Icons';
 import { PodcastTrack } from '../../components/PodcastTrack/PodcastTrack';
+import { SeekerTexts } from '../../constants/constants';
 import { useChannels } from '../../hooks/useChannels';
 import styles from './ChannelResults.module.css';
 export const ChannelResults = () => {
@@ -8,14 +9,8 @@ export const ChannelResults = () => {
         <>
             {channel && !( channel instanceof Error ) && (
                 <div className={styles.channelPage}>
-                    <h2><IconPodcast />Channel</h2>
+                    <h2><IconPodcast />{SeekerTexts.CHANNEL}</h2>
                     <div className={styles.info}>
-                        {/* <button
-                            className={`${styles.switchFavorite} ${favorite && styles.favoriteActive}`}
-                            onClick={handleFavoriteSwitch}
-                            type='button'>
-                            { favorite ? <IconFavorite /> : <IconNoFavorite />}
-                        </button> */}
                         <figure className={styles.infoFigure}>
                             <img
                                 className={styles.infoImg}
@@ -50,7 +45,7 @@ export const ChannelResults = () => {
             )}
             {channel && channel instanceof Error && (
                 <h3 className={styles.error}>
-                    <IconError /> Sorry about that! The channel has not been loaded
+                    <IconError /> {SeekerTexts.SORRY}
                 </h3>
             )}
         </>

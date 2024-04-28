@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SeekerConstants, SeekerTexts } from '../../constants/constants';
 import { PlayerContext } from '../../context/PlayerContext';
 import type { PodcastType } from '../../types/types';
 import { IconView } from '../Icons/Icons';
@@ -17,7 +18,7 @@ export const Podcast = ( { podcast }: PodcastProps ) => {
             trackId,
             feedUrl,
         } );
-        navigate( '/channel' );
+        navigate( SeekerConstants.CHANNEL_LINK );
     };
     return (
         <article className={styles.podcast}>
@@ -46,7 +47,7 @@ export const Podcast = ( { podcast }: PodcastProps ) => {
             <button
                 className={styles.podcastButton}
                 type='button'
-                title={`Ver ${ collectionName }`}
+                title={`${SeekerTexts.WATCH} ${ collectionName }`}
                 onClick={handleViewPodcast}>
                 <IconView />
             </button>
