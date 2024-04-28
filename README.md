@@ -6,8 +6,15 @@ Practice building a podcast seeker
 - URL EXAMPLE: https://itunes.apple.com/search?term=podimo&entity=podcast
 
 ## Goals:
-- [ ] Create seeker view
-- [ ] Create podcast view
-- [ ] Create service fetch
-- [ ] Create view components
+- [x] Create seeker view
+- [x] Create podcast view
+- [x] Create service fetch
+- [x] Create view components
+- [x] Create context
+- [x] Create search results
+- [x] Create channel
+- [x] Create player
+- [x] Create favorites podcast
+- [ ] Add Favorite channels
+- [ ] Add loading
 - [ ] Test
