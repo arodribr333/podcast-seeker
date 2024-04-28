@@ -1,4 +1,5 @@
 export const SeekerConstants = {
+    NO_IMAGE: '/no-image.jpg',
     BASE_LINK: './',
     CHANNEL_LINK: './channel',
     FAVS_LINK: './favorites',
