@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { SeekerConstants } from '../constants/constants';
 
 export const useImageUrl = (image: string) => {
-	const [imageSrc, setImageSrc] = useState<string>(SeekerConstants.DEFAULT_IMAGE);
+	const [imageSrc, setImageSrc] = useState<string>(`${import.meta.env.VITE_DEFAULT_IMAGE}`);
 	const handleSetImageSrc = ( image: string ) => {
 		setImageSrc(image);
 	};
