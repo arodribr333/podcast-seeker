@@ -10,7 +10,7 @@ interface getChannelProps {
 	trackId: number;
 }
 export const useChannels = () => {
-	const { channelUsed } = useContext(PlayerContext);
+	const { isLoading, channelUsed, handleIsLoading } = useContext(PlayerContext);
 	const { feedUrl, trackId } = channelUsed;
 	const { handleChannel } = useXMLParser();
 	const [channel, setChannel] = useState<Error | ReturnedChannel>();
@@ -23,15 +23,16 @@ export const useChannels = () => {
 		SeekerConstants.CHANNEL_KEY,
 		null,
 	);
-	useEffect(() => {
+	useEffect( () => {
 		if (data) {
 			setChannel(data);
 			return;
 		}
 		try {
-			getChannel({ feedUrl, trackId }).then((data) => {
+			getChannel( { feedUrl, trackId } ).then( ( data ) => {
 				setData(data);
 				setChannel(data);
+				handleIsLoading( false );
 			});
 		} catch (error) {
 			console.log(error);
@@ -43,15 +44,18 @@ export const useChannels = () => {
 			.then((inputData) => {
 				return handleChannel({ inputData, trackId, feedUrl });
 			})
-			.catch((error) => {
+			.catch( ( error ) => {
+				
 				console.log(`${SeekerTexts.FETCHING_ERROR} ${error}`);
-				const newError = new Error(`${SeekerTexts.FETCHING_ERROR} ${error}`);
+				const newError = new Error( `${ SeekerTexts.FETCHING_ERROR } ${ error }` );
+				handleIsLoading( false );
 				return newError;
 			});
 	};
 	return {
 		channel,
 		imageSrc,
+		isLoading,
 		getChannel,
 		handleImageError,
 	};

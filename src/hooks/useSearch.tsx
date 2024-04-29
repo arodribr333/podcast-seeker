@@ -5,7 +5,7 @@ import { PlayerContext } from '../context/PlayerContext';
 import { SearchPodcasts } from '../services/SearchPodcasts';
 
 export const useSearch = () => {
-    const { searchUsed, handleSearchUsedChange } = useContext( PlayerContext );
+    const { searchUsed, handleSearchUsedChange, handleIsLoading } = useContext( PlayerContext );
     const [ firstSearch, setFirstSearch ] = useState( true );
     const [ search, updateSearch ] = useState( '' );
     const [ error, setError ] = useState<string | null>( null );
@@ -24,6 +24,7 @@ export const useSearch = () => {
             return;
         }
         if ( search === term ) return;
+        handleIsLoading( true );
         await SearchPodcasts( { search } ).then( ( podcasts ) => {
             handleSearchUsedChange( {
                 hasResults: podcasts.resultCount > 0,
@@ -33,7 +34,7 @@ export const useSearch = () => {
             return podcasts;
         } );
         firstSearch && setFirstSearch( false );
-        if ( window.location.pathname === '/' ) return;
+        if ( window.location.pathname === SeekerConstants.BASE_LINK ) return;
         navigate( SeekerConstants.BASE_LINK );
     };
     const handleSearchTerm = useCallback( () => {

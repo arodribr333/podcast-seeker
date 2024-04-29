@@ -10,10 +10,11 @@ interface PodcastProps {
     podcast: PodcastType;
 }
 export const Podcast = ( { podcast }: PodcastProps ) => {
-    const { handleChannelUsedChange } = useContext( PlayerContext );
+    const { handleChannelUsedChange, handleIsLoading } = useContext( PlayerContext );
     const navigate = useNavigate();
     const { feedUrl, trackId, artworkUrl100, collectionName, artistName, genres, primaryGenreName } = podcast;
     const handleViewPodcast = () => {
+        handleIsLoading( true );
         handleChannelUsedChange( {
             trackId,
             feedUrl,

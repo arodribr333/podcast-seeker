@@ -20,6 +20,7 @@ export interface ProviderPlayer {
 export interface PlayerContextState {
     url: string;
     isPlaying: boolean;
+    isLoading: boolean;
     volume: number;
     currentTime: number;
     searchUsed: ProviderSearch;
@@ -35,6 +36,7 @@ export interface PlayerContextType {
     isPlaying: boolean;
     volume: number;
     currentTime: number;
+    isLoading: boolean;
     favorites: MappedXmlChannelItem[];
     handleUrlChange: ( url: string ) => void;
     handleSearchUsedChange: ( search: ProviderSearch ) => void;
@@ -45,6 +47,7 @@ export interface PlayerContextType {
     handleVolumeChange: ( newVolume: number ) => void;
     handleTimeChange: ( time: number ) => void;
     handleUpdateFavorites: ( item: MappedXmlChannelItem ) => void;
+    handleIsLoading: ( loading: boolean ) => void;
     isInFavorites: ( item: MappedXmlChannelItem ) => boolean;
 }
 export interface PlayerProviderProps {

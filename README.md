@@ -15,6 +15,6 @@ Practice building a podcast seeker
 - [x] Create channel
 - [x] Create player
 - [x] Create favorites podcast
+- [x] Add loading
 - [ ] Add Favorite channels
-- [ ] Add loading
 - [ ] Test

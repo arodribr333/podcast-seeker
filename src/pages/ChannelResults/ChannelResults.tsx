@@ -1,13 +1,15 @@
 import { IconError, IconPodcast } from '../../components/Icons/Icons';
+import { Loading } from '../../components/Loading/Loading';
 import { PodcastTrack } from '../../components/PodcastTrack/PodcastTrack';
-import { SeekerTexts } from '../../constants/constants';
+import { GenericLoadingStyles, SeekerTexts } from '../../constants/constants';
 import { useChannels } from '../../hooks/useChannels';
 import styles from './ChannelResults.module.css';
 export const ChannelResults = () => {
-    const { channel, imageSrc, handleImageError } = useChannels();
+    const { isLoading, channel, imageSrc, handleImageError } = useChannels();
     return (
         <>
-            {channel && !( channel instanceof Error ) && (
+            {isLoading && <Loading loadingStyles={GenericLoadingStyles} />}
+            {(!isLoading && channel && !( channel instanceof Error )) && (
                 <div className={styles.channelPage}>
                     <h2><IconPodcast />{SeekerTexts.CHANNEL}</h2>
                     <div className={styles.info}>
@@ -43,7 +45,7 @@ export const ChannelResults = () => {
                     </div>
                 </div>
             )}
-            {channel && channel instanceof Error && (
+            {(!isLoading && channel && channel instanceof Error) && (
                 <h3 className={styles.error}>
                     <IconError /> {SeekerTexts.SORRY}
                 </h3>

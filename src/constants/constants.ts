@@ -34,3 +34,6 @@ export const SeekerTexts = {
     VOLUME_REGULATOR_DISPLAY: 'Display volume regulator',
     WATCH: 'Watch'
 };
+export const GenericLoadingStyles: React.CSSProperties = {
+    opacity: '0.9'
+};

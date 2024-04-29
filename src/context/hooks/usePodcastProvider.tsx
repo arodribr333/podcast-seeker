@@ -11,6 +11,7 @@ import type { MappedXmlChannelItem } from '../../types/types';
 
 const initialState: PlayerContextState = {
 	url: '',
+	isLoading: false,
 	isPlaying: false,
 	volume: 1,
 	currentTime: 0,
@@ -45,6 +46,7 @@ export const usePodcastProvider = () => {
 	const [isPlaying, setIsPlaying] = useState<boolean>(false);
 	const [volume, setVolume] = useState<number>(1);
 	const [currentTime, setCurrentTime] = useState<number>(0);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [favorites, updateFavorites] = useState<MappedXmlChannelItem[]>([]);
 	const [savedFavorites, setSavedFavorites] = useLocalStorage<
 	MappedXmlChannelItem[] | null
@@ -80,6 +82,9 @@ export const usePodcastProvider = () => {
 	const handleTimeChange = (time: number) => {
 		setCurrentTime(time);
 	};
+	const handleIsLoading = (loading: boolean) => {
+		setIsLoading(loading);
+	};
 	const isInFavorites = (item: MappedXmlChannelItem): boolean => {
 		return favorites.some((fav) => fav.id === item?.id);
 	};
@@ -104,6 +109,7 @@ export const usePodcastProvider = () => {
 		volume,
 		currentTime,
 		favorites,
+		isLoading,
 		handleUrlChange,
 		handleSearchUsedChange,
 		handleChannelUsedChange,
@@ -114,5 +120,6 @@ export const usePodcastProvider = () => {
 		handleTimeChange,
 		handleUpdateFavorites,
 		isInFavorites,
+		handleIsLoading
 	};
 };
