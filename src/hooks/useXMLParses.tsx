@@ -25,16 +25,16 @@ export const useXMLParser = () => {
             const year = date.getFullYear();
             return `${ day }/${ month }/${ year }`;
         };
-        const getItemId = ( date: string ): number => {
+        const getItemId = ( date: string, title: string ): number => {
             const pub = new Date( date ).getTime();
-            const result = ( Math.floor( trackId * ( trackId * 5 ) ) ) + pub;
+            const result = ( Math.floor( trackId * ( trackId * 5 ) ) ) + (pub * title.length );
             return result;
         };
         const processXmlItem = ( item: XmlChannelItem[] | XmlChannelItem, channelTitle: string ) => {
             if ( Array.isArray( item ) ) {
                 const XmlMappedItems = xmlItem.map( ( item ) => {
                     return {
-                        id: getItemId( item.pubDate ),
+                        id: getItemId( item.pubDate, item.title.toString()),
                         channel: channelTitle,
                         duration: item.duration?.__text,
                         audio: item.enclosure?._url,
@@ -49,7 +49,7 @@ export const useXMLParser = () => {
             }
             const { duration, enclosure, episode, image, season, title, pubDate } = item;
             const compose = {
-                id: getItemId( pubDate ),
+                id: getItemId( pubDate, title.toString() ),
                 channel: channelTitle,
                 duration: duration?.__text,
                 audio: enclosure?._url,
